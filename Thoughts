@@ -1,0 +1,16 @@
+Corentin Manscour a commit ce document :
+
+Différentes fonctionalités plus ou moins secondaires :
+
+    contexte : le chatbot est doté d'une mémoire a court terme, qui lui permet de comprendre
+des référence à des sujets qui viennent d'^etre abordés.
+
+    emotion : le chatbot oscille entre plusieurs mood, et donne des réponses différentes, ou parle
+de tel ou tel sujet en fonction de son état d'esprit
+
+    historique : le chatbot est capable de se souvenir d'évènements qui se sont passés auparavant,
+et d'y faire référence
+
+    non linéarité : abandon de la structure "un imput = une réponse immédiate".
+
+    
