@@ -4,15 +4,25 @@
 import numpy as np
 import random 
 
-listModeOne = ["hmm", "ehh", "ahh", "ok", "lol", "yes", "right", "good", "huhu", "haha"]
 
-answerModeOne = ""
 
-def modeOne():
 
-	global answerModeOne
-	
-	x = input("User: ")
+def read_data_line(fname):
+
+    linesRead = []
+    	
+    #ouverture automatique du fichier
+    with open(fname, "r") as fp:
+
+        for line in fp.readlines():
+            if line.strip() == "": continue 	#on saute les lignes vides
+            linesRead.append(line)	
+
+    return linesRead
+
+
+
+def modeOne(listModeOne, answerModeOne):
 
 	loop = True
 
@@ -29,5 +39,11 @@ def modeOne():
 
 if __name__=="__main__":	
 	
+
+	listModeOne = []
+	listModeOne = read_data_line("./data/dataModeOne.txt")
+	answerModeOne = ""
+
 	while(True):
-		modeOne()
+		x = input("User: ")
+		modeOne(listModeOne, answerModeOne)
