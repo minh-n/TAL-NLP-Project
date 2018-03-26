@@ -5,8 +5,6 @@ import numpy as np
 import random 
 
 
-
-
 def read_data_line(fname):
 
     linesRead = []
@@ -21,7 +19,6 @@ def read_data_line(fname):
     return linesRead
 
 
-
 def modeOne(listModeOne, answerModeOne):
 
 	loop = True
@@ -32,13 +29,18 @@ def modeOne(listModeOne, answerModeOne):
 		if(answer != answerModeOne):
 			loop = False
 
-	print("Bot: " + answer)
+	printAnswer(answer)
  
-	answerModeOne = answer
+	return answer
+
+
+
+def printAnswer(answer):
+	print("\tBot: " + answer)
+
 
 
 if __name__=="__main__":	
-	
 
 	listModeOne = []
 	listModeOne = read_data_line("./data/dataModeOne.txt")
@@ -46,4 +48,4 @@ if __name__=="__main__":
 
 	while(True):
 		x = input("User: ")
-		modeOne(listModeOne, answerModeOne)
+		answerModeOne = modeOne(listModeOne, answerModeOne)
