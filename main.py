@@ -3,7 +3,7 @@
 
 import numpy as np
 import random 
-
+import nltk 
 
 def readDataLine(fname):
 
@@ -36,7 +36,6 @@ def modeOne(listModeOne, answerModeOne):
 
 def printAnswer(answer):
 	print("\tBot: " + answer)
-
 
 
 def modeTwo():
