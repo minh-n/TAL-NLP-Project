@@ -1,7 +1,6 @@
-person
-human
-people
-man
-woman
-guy
-dude
+Archibald
+Manscour
+Stephanie
+Dola
+Tommy
+Wiseau

@@ -55,6 +55,7 @@ def createDict():
 	return
 
 
+#tokenize a given sentence, using nltk's word_tokenize 
 def tokenizeSentence(sentence):
 
 	sentWordList = word_tokenize(sentence)
@@ -67,7 +68,6 @@ def tokenizeSentence(sentence):
 	return sentWordList
 
 
-
 def botAnswer():
 	return
 
@@ -75,13 +75,25 @@ def botAnswer():
 
 
 
-if __name__=="__main__":	
 
+
+
+def modeThree():
+	return
+
+
+
+if __name__=="__main__":	
+  
 	listModeOne = []
-	listModeOne = readDataLine("./data/dataModeOne.txt")
+	listModeOne = readDataLine("../data/dataModeOne.txt")
 	answerModeOne = ""
+	
+	print("\nWelcome to the chatbot simulation.\n")
 
 	while(True):
+
+
 		inputUser = input("User: ")
 		tokenizeSentence(inputUser)
 

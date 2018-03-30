@@ -1,0 +1,30 @@
+#AI
+Are we really talking about me?
+I'd prefer if we focus on the story, please.
+Oh you know, I'm just a bunch of 1s and 0s.
+
+
+#Character of the story
+What do you think about %name?
+Do you like %name?
+
+
+
+#Emotion
+Do you feel %?
+
+
+
+#Environment
+What do you think will happen at %place?
+It seems no one is in %place.
+%place is just a random place.
+Yes, %name is in %place.
+
+
+
+#Info
+I can give you a clue about %name.
+Do you really want to know?
+I will tell you when the time comes.
+
