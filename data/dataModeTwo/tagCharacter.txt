@@ -1,0 +1,7 @@
+person
+human
+people
+man
+woman
+guy
+dude

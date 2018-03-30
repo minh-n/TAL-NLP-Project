@@ -1,0 +1,9 @@
+good 
+great
+bad
+awful
+awesome
+feeling
+happy
+happiness
+sadness
