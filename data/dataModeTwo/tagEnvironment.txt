@@ -1,0 +1,12 @@
+room
+place
+house
+map
+bathroom
+garden
+kitchen
+roof
+hall
+ground
+door
+window

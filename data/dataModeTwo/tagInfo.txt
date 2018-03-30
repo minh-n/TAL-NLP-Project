@@ -1,0 +1,8 @@
+name
+names
+clue
+clues
+trace
+traces
+origin
+origins

@@ -5,15 +5,15 @@ import numpy as np
 import random 
 
 
-def read_data_line(fname):
+def readDataLine(fname):
 
     linesRead = []
     	
-    #ouverture automatique du fichier
+    #file opening
     with open(fname, "r") as fp:
 
         for line in fp.readlines():
-            if line.strip() == "": continue 	#on saute les lignes vides
+            if line.strip() == "": continue 	#skipping empty lines
             linesRead.append(line)	
 
     return linesRead
@@ -34,16 +34,33 @@ def modeOne(listModeOne, answerModeOne):
 	return answer
 
 
-
 def printAnswer(answer):
 	print("\tBot: " + answer)
 
 
 
+def modeTwo():
+	return
+
+
+def contains(word):
+	return
+
+def createDict():
+	return
+
+
+def tokenizeQuestion():
+	return
+
+def botAnswer():
+	return
+
+
 if __name__=="__main__":	
 
 	listModeOne = []
-	listModeOne = read_data_line("./data/dataModeOne.txt")
+	listModeOne = readDataLine("./data/dataModeOne.txt")
 	answerModeOne = ""
 
 	while(True):
