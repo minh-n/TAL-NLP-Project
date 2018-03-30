@@ -4,6 +4,10 @@
 import numpy as np
 import random 
 import nltk 
+from nltk.tokenize import word_tokenize
+
+#to use NLTK, downloading an extra package is needed:
+#(python) or (py3) -m nltk.downloader 'punkt'
 
 def readDataLine(fname):
 
@@ -49,8 +53,31 @@ def createDict():
 	return
 
 
-def tokenizeQuestion():
-	return
+def tokenizeSentence(sentence):
+
+	sentWordList = word_tokenize(sentence)
+	
+	#affiche la liste des mots de la phrase
+	#print("\nUeer said : ")
+	#for s in sentWordList:
+	#	print(s)
+
+	return sentWordList
+
+
+def tokenise_en(sent):
+
+	sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
+	sent = re.sub(" \'", r" ' ", sent) # separate apostrophe from following word if a space if left
+
+    # separate on punctuation
+	cannot_precede = ["M", "Prof", "Sgt", "Lt", "Ltd", "co", "etc", "[A-Z]", "[Ii].e", "[eE].g"] # non-exhaustive list
+	regex_cannot_precede = "(?:(?<!"+")(?<!".join(cannot_precede)+"))"
+	sent = re.sub(regex_cannot_precede+"([\.\,\;\:\)\(\"\?\!]( |$))", r" \1", sent)
+	sent = re.sub("((^| )[\.\?\!]) ([\.\?\!]( |$))", r"\1\2", sent) # then restick several fullstops ... or several ?? or !!
+	sent = sent.split() # split on whitespace
+	return sent
+
 
 def botAnswer():
 	return
@@ -63,5 +90,7 @@ if __name__=="__main__":
 	answerModeOne = ""
 
 	while(True):
-		x = input("User: ")
+		inputUser = input("User: ")
+		tokenizeSentence(inputUser)
+
 		answerModeOne = modeOne(listModeOne, answerModeOne)
