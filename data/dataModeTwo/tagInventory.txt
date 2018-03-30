@@ -1,0 +1,16 @@
+knife
+spoon
+fork
+sword
+torch
+glasses
+money
+phone
+cellphone
+smartphone
+camera
+wallet
+card
+credit card
+watch
+ring

@@ -9,12 +9,6 @@ What do you think about %name?
 Do you like %name?
 
 
-
-#Emotion
-Do you feel %?
-
-
-
 #Environment
 What do you think will happen at %place?
 It seems no one is in %place.
