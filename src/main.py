@@ -94,7 +94,7 @@ if __name__=="__main__":
 	while(True):
 
 
-		inputUser = input("User: ")
+		inputUser = raw_input("User: ")
 		tokenizeSentence(inputUser)
 
 		answerModeOne = modeOne(listModeOne, answerModeOne)
