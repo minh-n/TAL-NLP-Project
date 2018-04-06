@@ -27,7 +27,7 @@ def readDataLine(fname):
     return linesRead
 
 
-def modeOne(listModeOne, answerModeOne):
+def modeOne(listModeOne, answerModeOne, appendString):
 
 	loop = True
 
@@ -36,9 +36,19 @@ def modeOne(listModeOne, answerModeOne):
 		answer = listModeOne[answerNum]
 		if(answer != answerModeOne):
 			loop = False
+		if(appendString != None):
+			mystring = answer
+			pattern = re.compile(r'<.+>')
+			newstring = pattern.sub(appendString, mystring)
+			answer = newstring
+ 	
+	return answer
 
-	printAnswer(answer)
- 
+def answerVerb(sentString, verb):
+
+	buff = ''.join(map(str,sentString[sentString.index(verb) + len(verb):]))
+	answer = "Are you " + buff + "?"
+
 	return answer
 
 
@@ -46,55 +56,77 @@ def printAnswer(answer):
 	print("\tBot: " + answer)
 
 
-def modeTwo(sent, dicoModeTwo, answerModeTwo, answerAI, answerCharacter, answerEmotion, answerEnvironment, answerInfo):
+def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo):
     tag = None
     answer = ""
     
-    #for cle, value in dicoModeTwo.items():
+    currentWord = ""
+
+    #for cle, value in dictModeTwo.items():
         #print("mot : {}, tag : {}".format(cle, value))
     for word in sent:
         #print(word)
-        if word in dicoModeTwo:
-            tag = dicoModeTwo[word]
+        if word in dictModeTwo:
+            currentWord = word 			#an useful word is memorized
+            tag = dictModeTwo[word]
             break
+        if word in dictVerb:
+        	sentString = ''.join(sent)
+        	answer = answerVerb(sentString, word)
+        	break
 
-    if tag != None:
+    if tag != None:						#computing the answer depending on its tag
         if tag == "tagAI.txt":
-            answer = modeOne(answerAI, answerModeTwo)
+            answer = modeOne(answerAI, answerModeTwo, None)
         elif tag == "tagCharacter.txt":
-            answer = modeOne(answerCharacter, answerModeTwo)
-        elif tag == "tagEmotion.txt":
-            answer = modeOne(answerEmotion, answerModeTwo)
+            answer = modeOne(answerCharacter, answerModeTwo, currentWord)
+        elif tag == "tagInventory.txt":
+            answer = modeOne(answerInventory, answerModeTwo, currentWord)
         elif tag == "tagEnvironment.txt":
-            answer = modeOne(answerEnvironment, answerModeTwo)
-        else:
+            answer = modeOne(answerEnvironment, answerModeTwo, currentWord)
+        elif tag == "tagInfo.txt":
             answer = modeOne(answerInfo, answerModeTwo)
-        
+        else:
+            print("DEBUG : tagging error (this line should not appear)!")
     return answer
 
 def contains(word):
 	return
 
 def createDict():
-    dico = {}
+    dict = {}
     for element in os.listdir("../data/dataModeTwo"):
         with open("../data/dataModeTwo/" + element, "r") as fp:
             for line in fp.readlines():
-                if line.strip() == "": continue 	#skipping empty lines
-                dico[line] = element	
-        
-    return dico
+                if line.strip() == "": continue 		#skipping empty lines
+                linelen = len(line)-1               	#removing \n 
+                line = line[:linelen]
+                dict[line] = element    
+    return dict
+
+def createDictVerb():
+    dict = {}
+    with open("../data/tagVerb.txt", "r") as fp:
+        for line in fp.readlines():
+            if line.strip() == "": continue 		#skipping empty lines
+            linelen = len(line)-1               	#removing \n 
+            line = line[:linelen]
+            dict[line] = "verb"    
+    return dict
+
+
+
 
 def tokenise_en(sent):
-    sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
-    sent = re.sub(" \'", r" ' ", sent) # separate apostrophe from following word if a space if left
+    sent = re.sub("([^ ])\'", r"\1 '", sent) 			# separate apostrophe from preceding word by a space if no space to left
+    sent = re.sub(" \'", r" ' ", sent) 					# separate apostrophe from following word if a space if left
 
     # separate on punctuation
     cannot_precede = ["M", "Prof", "Sgt", "Lt", "Ltd", "co", "etc", "[A-Z]", "[Ii].e", "[eE].g"] # non-exhaustive list
     regex_cannot_precede = "(?:(?<!"+")(?<!".join(cannot_precede)+"))"
     sent = re.sub(regex_cannot_precede+"([\.\,\;\:\)\(\"\?\!]( |$))", r" \1", sent)
     sent = re.sub("((^| )[\.\?\!]) ([\.\?\!]( |$))", r"\1\2", sent) # then restick several fullstops ... or several ?? or !!
-    sent = sent.split() # split on whitespace
+    sent = sent.split() 								# split on whitespace
     return sent
 
 
@@ -102,11 +134,10 @@ def tokenizeQuestion():
 	return
 
 
-
 #tokenize a given sentence, using nltk's word_tokenize 
-def tokenizeSentence(sentence):
+def tokenizeSentence(sent):
 
-	sentWordList = word_tokenize(sentence)
+	sentWordList = word_tokenize(sent)
 	
 	#affiche la liste des mots de la phrase
 	#print("\nUeer said : ")
@@ -120,15 +151,8 @@ def botAnswer():
 	return
 
 
-
-
-
-
-
-
 def modeThree():
 	return
-
 
 
 if __name__=="__main__":
@@ -136,12 +160,13 @@ if __name__=="__main__":
     listModeOne = readDataLine("../data/dataModeOne.txt")
     answerModeOne = ""
     answerModeTwo = ""
-    dicoModeTwo = createDict()
+    dictModeTwo = createDict()
+    dictVerb = createDictVerb()
     user = ""
     
     answerAI = readDataLine("../data/dataModeTwoAnswers/answerAI.txt")
     answerCharacter = readDataLine("../data/dataModeTwoAnswers/answerCharacter.txt")
-    answerEmotion = readDataLine("../data/dataModeTwoAnswers/answerEmotion.txt")
+    answerInventory = readDataLine("../data/dataModeTwoAnswers/answerInventory.txt")
     answerEnvironment = readDataLine("../data/dataModeTwoAnswers/answerEnvironment.txt")
     answerInfo = readDataLine("../data/dataModeTwoAnswers/answerInfo.txt")
 
@@ -151,10 +176,10 @@ if __name__=="__main__":
             printAnswer("Bye")
         else:
             sent = tokenise_en(user)
-            answerModeTwo = modeTwo(sent, dicoModeTwo, answerModeTwo, answerAI, answerCharacter, answerEmotion, answerEnvironment, answerInfo)
+            answerModeTwo = modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
             if answerModeTwo != "":
                 printAnswer(answerModeTwo)
             else:
-                answerModeOne = modeOne(listModeOne, answerModeOne)
+                answerModeOne = modeOne(listModeOne, answerModeOne, None)
                 printAnswer(answerModeOne)
         
