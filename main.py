@@ -33,46 +33,52 @@ def modeOne(listModeOne, answerModeOne):
 def printAnswer(answer):
 	print("\tBot: " + answer)
 
+def createDict():
+    dico = {}
+    for element in os.listdir("./data/dataModeTwo"):
+        with open("./data/dataModeTwo/" + element, "r") as fp:
+            for line in fp.readlines():
+                if line.strip() == "": continue     #skipping empty lines
+                linelen = len(line)-1               #removing last character (\n)
+                line = line[:linelen]
+                dico[line] = element    
+    return dico
 
 def modeTwo(sent, dicoModeTwo, answerModeTwo, answerAI, answerCharacter, answerEmotion, answerEnvironment, answerInfo):
     tag = None
     answer = ""
     
-    for cle, value in dicoModeTwo.items():
-        print("mot : {}, tag : {}".format(cle, value))
+    #for cle, value in dicoModeTwo.items():
+    #    print("mot : {}         tag : {}".format(cle, value))
+
     for word in sent:
-        print(word)
+        #print(word)
         if word in dicoModeTwo:
+            #print("Word " + word + " is in dict")
             tag = dicoModeTwo[word]
             break
 
     if tag != None:
         if tag == "tagAI.txt":
             answer = modeOne(answerAI, answerModeTwo)
+            print("answer AI")
         elif tag == "tagCharacter.txt":
             answer = modeOne(answerCharacter, answerModeTwo)
+            print("answer character")
         elif tag == "tagEmotion.txt":
+            print("answer emotion")
             answer = modeOne(answerEmotion, answerModeTwo)
         elif tag == "tagEnvironment.txt":
+            print("answer environment")
             answer = modeOne(answerEnvironment, answerModeTwo)
         else:
+            print("No Answer possible.")
             answer = modeOne(answerInfo, answerModeTwo)
-        
     return answer
 
 
 def contains(word):
 	return
-
-def createDict():
-    dico = {}
-    for element in os.listdir("./data/dataModeTwo"):
-        with open("./data/dataModeTwo/" + element, "r") as fp:
-            for line in fp.readlines():
-                if line.strip() == "": continue 	#skipping empty lines
-                dico[line] = element	
-        
-    return dico
 
 def tokenise_en(sent):
     sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
@@ -109,7 +115,7 @@ if __name__=="__main__":
     answerInfo = readDataLine("./data/dataModeTwoAnswers/answerInfo.txt")
 
     while(user != "quit"):
-        user = input("User: ")
+        user = raw_input("User: ")
         if user == "quit":
             printAnswer("Bye")
         else:
