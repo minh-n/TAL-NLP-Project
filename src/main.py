@@ -46,10 +46,16 @@ def modeOne(listModeOne, answerModeOne, appendString):
 
 def answerVerb(sentString, verb):
 
-	buff = ''.join(map(str,sentString[sentString.index(verb) + len(verb):]))
-	answer = "Are you " + buff + "?"
+	ans = ""
+	buff = sentString[sentString.index(verb) + len(verb):]
 
-	return answer
+	if verb == "was":
+		ans = "Why were you" + buff + "?"
+
+	elif verb == "is":
+		ans = "Why are you" + buff + "?"
+
+	return ans
 
 
 def printAnswer(answer):
@@ -66,14 +72,15 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
         #print("mot : {}, tag : {}".format(cle, value))
     for word in sent:
         #print(word)
+        if word in dictVerb:
+        	sentString = ' '.join(sent)
+        	answer = answerVerb(sentString, word)
+        	break
         if word in dictModeTwo:
             currentWord = word 			#an useful word is memorized
             tag = dictModeTwo[word]
             break
-        if word in dictVerb:
-        	sentString = ''.join(sent)
-        	answer = answerVerb(sentString, word)
-        	break
+
 
     if tag != None:						#computing the answer depending on its tag
         if tag == "tagAI.txt":
