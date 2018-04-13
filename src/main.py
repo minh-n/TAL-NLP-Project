@@ -178,7 +178,7 @@ if __name__=="__main__":
     answerInfo = readDataLine("../data/dataModeTwoAnswers/answerInfo.txt")
 
     while(user != "quit"):
-        user = raw_input("User: ")
+        user = input("User: ")
         if user == "quit":
             printAnswer("Bye")
         else:
