@@ -45,17 +45,59 @@ def modeOne(listModeOne, answerModeOne, appendString):
 	return answer
 
 def answerVerb(sentString, verb):
-
 	ans = ""
-	buff = sentString[sentString.index(verb) + len(verb):]
+	temp = []
+	temp = andProb(sentString, temp)
 
-	if verb == "was":
-		ans = "Why were you" + buff + "?"
+	for eachPart in temp:
+		if "I" in eachPart:
+			if verb in eachPart:
+				buff = eachPart[eachPart.index(verb) + len(verb):]
+				buff = ' '.join(buff)
 
-	elif verb == "is":
-		ans = "Why are you" + buff + "?"
+				if verb == "am":
+					ans = "Why are you " + buff + "?"
+				elif verb == "was":
+					ans = "Why were you " + buff + "?"
+				elif verb == "am being":
+					ans = "Why are you being " + buff + "?"
+				elif verb == "have been":
+					ans = "Why have you been " + buff + "?"
+				elif verb == "will be":
+					ans = "Why will you be " + buff + "?"
+				elif verb == "will have been":
+					ans = "Why will have you been " + buff + "?"
+				elif verb == "was being":
+					ans = "Why were you being " + buff + "?"
+				elif verb == "had been":
+					ans = "Why had you been " + buff + "?"
+				elif verb == "will be being":
+					ans = "Why will be you being " + buff + "?"
+				elif verb == "have been being":
+					ans = "Why have you been being " + buff + "?"
+				elif verb == "had been being":
+					ans = "Why had you been being " + buff + "?"
+				elif verb == "will have been being":
+					ans = "Why will have you been being " + buff + "?"
+				else:
+					print("DEBUG : answerVerb error (this line should not appear)!") 
+				break
+
 
 	return ans
+
+
+def andProb(sentString, temp):
+	if "and" in sentString:
+		firstPart = sentString[:sentString.index("and")]
+		secondPart = sentString[-(len(sentString) - sentString.index("and") - 4):]
+		temp.append(firstPart)
+		temp = andProb(secondPart, temp)
+	else:
+		temp.append(sentString)
+
+	return temp
+
 
 
 def printAnswer(answer):
@@ -70,17 +112,20 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 
     #for cle, value in dictModeTwo.items():
         #print("mot : {}, tag : {}".format(cle, value))
-    for word in sent:
-        #print(word)
-        if word in dictVerb:
-        	sentString = ' '.join(sent)
-        	answer = answerVerb(sentString, word)
-        	break
-        if word in dictModeTwo:
-            currentWord = word 			#an useful word is memorized
-            tag = dictModeTwo[word]
-            break
 
+    sentStr = " ".join(sent)
+
+    for key in dictVerb:
+    	if key in sentStr:
+    		answer = answerVerb(sent, key)
+    		break
+
+    if answer == "":
+        for word in sent:
+            if word in dictModeTwo:
+                currentWord = word 			#an useful word is memorized
+                tag = dictModeTwo[word]
+                break
 
     if tag != None:						#computing the answer depending on its tag
         if tag == "tagAI.txt":
@@ -100,6 +145,7 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 def contains(word):
 	return
 
+
 def createDict():
     dict = {}
     for element in os.listdir("../data/dataModeTwo"):
@@ -110,6 +156,7 @@ def createDict():
                 line = line[:linelen]
                 dict[line] = element    
     return dict
+
 
 def createDictVerb():
     dict = {}
@@ -122,19 +169,16 @@ def createDictVerb():
     return dict
 
 
+def createDictSubject():
+    dict = {}
+    with open("../data/tagSubject.txt", "r") as fp:
+        for line in fp.readlines():
+            if line.strip() == "": continue 		#skipping empty lines
+            linelen = len(line)-1               	#removing \n 
+            line = line[:linelen]
+            dict[line] = "subject"    
+    return dict
 
-
-def tokenise_en(sent):
-    sent = re.sub("([^ ])\'", r"\1 '", sent) 			# separate apostrophe from preceding word by a space if no space to left
-    sent = re.sub(" \'", r" ' ", sent) 					# separate apostrophe from following word if a space if left
-
-    # separate on punctuation
-    cannot_precede = ["M", "Prof", "Sgt", "Lt", "Ltd", "co", "etc", "[A-Z]", "[Ii].e", "[eE].g"] # non-exhaustive list
-    regex_cannot_precede = "(?:(?<!"+")(?<!".join(cannot_precede)+"))"
-    sent = re.sub(regex_cannot_precede+"([\.\,\;\:\)\(\"\?\!]( |$))", r" \1", sent)
-    sent = re.sub("((^| )[\.\?\!]) ([\.\?\!]( |$))", r"\1\2", sent) # then restick several fullstops ... or several ?? or !!
-    sent = sent.split() 								# split on whitespace
-    return sent
 
 
 def tokenizeQuestion():
@@ -145,17 +189,8 @@ def tokenizeQuestion():
 def tokenizeSentence(sent):
 
 	sentWordList = word_tokenize(sent)
-	
-	#affiche la liste des mots de la phrase
-	#print("\nUeer said : ")
-	#for s in sentWordList:
-	#	print(s)
 
 	return sentWordList
-
-
-def botAnswer():
-	return
 
 
 def modeThree():
@@ -182,7 +217,7 @@ if __name__=="__main__":
         if user == "quit":
             printAnswer("Bye")
         else:
-            sent = tokenise_en(user)
+            sent = tokenizeSentence(user)
             answerModeTwo = modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
             if answerModeTwo != "":
                 printAnswer(answerModeTwo)
