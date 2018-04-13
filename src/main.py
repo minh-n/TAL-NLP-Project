@@ -52,7 +52,7 @@ def answerVerb(sentString, verb):
 	if verb == "was":
 		ans = "Why were you" + buff + "?"
 
-	elif verb == "is":
+	elif verb == "am":
 		ans = "Why are you" + buff + "?"
 
 	return ans

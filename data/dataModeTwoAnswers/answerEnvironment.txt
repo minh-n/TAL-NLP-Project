@@ -1,4 +1,4 @@
-What do you think will happen at <place>?
-It seems no one is in <place>.
+What do you think will happen in the <place>?
+It seems no one is in the <place>.
 <place> is just some random place.
-Someone is in <place>.
+Someone is in the <place>.

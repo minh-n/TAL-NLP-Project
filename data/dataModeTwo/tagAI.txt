@@ -1,4 +1,5 @@
 AI
+ai
 computer
 machine
 artificial intelligence
