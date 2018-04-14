@@ -48,6 +48,9 @@ def answerVerb(sentString, verb):
     ans = ""
     temp = []
     temp = andProb(sentString, temp)
+    
+    for part in temp:
+        print(part)
 
     for eachPart in temp:
         if "I" in eachPart:
@@ -88,15 +91,15 @@ def answerVerb(sentString, verb):
 
 
 def andProb(sentString, temp):
-	if "and" in sentString:
-		firstPart = sentString[:sentString.index("and")]
-		secondPart = sentString[-(len(sentString) - sentString.index("and") - 4):]
-		temp.append(firstPart)
-		temp = andProb(secondPart, temp)
-	else:
-		temp.append(sentString)
+    if "and" in sentString:
+        firstPart = sentString[:sentString.index("and")]
+        secondPart = sentString[-(len(sentString) - (sentString.index("and")+1)):]
+        temp.append(firstPart)
+        temp = andProb(secondPart, temp)
+    else:
+        temp.append(sentString)
 
-	return temp
+    return temp
 
 
 
