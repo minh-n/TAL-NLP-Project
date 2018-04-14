@@ -1,16 +1,12 @@
-be
 am
-is
-are
 was
-were
-been
-being
-Be
-Am
-Is
-Are
-Was
-Were
-Been
-Being
+am being
+have been
+will be
+was being
+had been
+will have been
+will be being
+have been being
+had been being
+will have been being

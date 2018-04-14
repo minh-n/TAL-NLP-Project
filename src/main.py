@@ -45,46 +45,46 @@ def modeOne(listModeOne, answerModeOne, appendString):
 	return answer
 
 def answerVerb(sentString, verb):
-	ans = ""
-	temp = []
-	temp = andProb(sentString, temp)
+    ans = ""
+    temp = []
+    temp = andProb(sentString, temp)
 
-	for eachPart in temp:
-		if "I" in eachPart:
-			if verb in eachPart:
-				buff = eachPart[eachPart.index(verb) + len(verb):]
-				buff = ' '.join(buff)
+    for eachPart in temp:
+        if "I" in eachPart:
+            tmp = " ".join(eachPart)
+            if verb in tmp:
+                
+                buff = tmp[tmp.find(verb)+len(verb):]
+                           
+                if verb == "am":
+                    ans = "Why are you" + buff + "?"
+                elif verb == "was":
+                    ans = "Why were you" + buff + "?"
+                elif verb == "am being":
+                    ans = "Why are you being" + buff + "?"
+                elif verb == "have been":
+                    ans = "Why have you been" + buff + "?"
+                elif verb == "will be":
+                    ans = "Why will you be" + buff + "?"
+                elif verb == "will have been":
+                    ans = "Why will have you been" + buff + "?"
+                elif verb == "was being":
+                    ans = "Why were you being" + buff + "?"
+                elif verb == "had been":
+                    ans = "Why had you been" + buff + "?"
+                elif verb == "will be being":
+                    ans = "Why will be you being" + buff + "?"
+                elif verb == "have been being":
+                    ans = "Why have you been being" + buff + "?"
+                elif verb == "had been being":
+                    ans = "Why had you been being" + buff + "?"
+                elif verb == "will have been being":
+                    ans = "Why will have you been being" + buff + "?"
+                else:
+                    print("DEBUG : answerVerb error (this line should not appear)!") 
+                break
 
-				if verb == "am":
-					ans = "Why are you " + buff + "?"
-				elif verb == "was":
-					ans = "Why were you " + buff + "?"
-				elif verb == "am being":
-					ans = "Why are you being " + buff + "?"
-				elif verb == "have been":
-					ans = "Why have you been " + buff + "?"
-				elif verb == "will be":
-					ans = "Why will you be " + buff + "?"
-				elif verb == "will have been":
-					ans = "Why will have you been " + buff + "?"
-				elif verb == "was being":
-					ans = "Why were you being " + buff + "?"
-				elif verb == "had been":
-					ans = "Why had you been " + buff + "?"
-				elif verb == "will be being":
-					ans = "Why will be you being " + buff + "?"
-				elif verb == "have been being":
-					ans = "Why have you been being " + buff + "?"
-				elif verb == "had been being":
-					ans = "Why had you been being " + buff + "?"
-				elif verb == "will have been being":
-					ans = "Why will have you been being " + buff + "?"
-				else:
-					print("DEBUG : answerVerb error (this line should not appear)!") 
-				break
-
-
-	return ans
+    return ans
 
 
 def andProb(sentString, temp):
@@ -118,7 +118,6 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
     for key in dictVerb:
     	if key in sentStr:
     		answer = answerVerb(sent, key)
-    		break
 
     if answer == "":
         for word in sent:
@@ -192,6 +191,19 @@ def tokenizeSentence(sent):
 
 	return sentWordList
 
+ 
+def tokenise_en(sent):
+
+    sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
+    sent = re.sub(" \'", r" ' ", sent) # separate apostrophe from following word if a space if left
+
+    # separate on punctuation
+    cannot_precede = ["M", "Prof", "Sgt", "Lt", "Ltd", "co", "etc", "[A-Z]", "[Ii].e", "[eE].g"] # non-exhaustive list
+    regex_cannot_precede = "(?:(?<!"+")(?<!".join(cannot_precede)+"))"
+    sent = re.sub(regex_cannot_precede+"([\.\,\;\:\)\(\"\?\!]( |$))", r" \1", sent)
+    sent = re.sub("((^| )[\.\?\!]) ([\.\?\!]( |$))", r"\1\2", sent) # then restick several fullstops ... or several ?? or !!
+    sent = sent.split() # split on whitespace
+    return sent
 
 def modeThree():
 	return
@@ -217,7 +229,7 @@ if __name__=="__main__":
         if user == "quit":
             printAnswer("Bye")
         else:
-            sent = tokenizeSentence(user)
+            sent = tokenise_en(user)
             answerModeTwo = modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
             if answerModeTwo != "":
                 printAnswer(answerModeTwo)
