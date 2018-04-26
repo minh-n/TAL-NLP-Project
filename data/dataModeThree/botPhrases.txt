@@ -1,0 +1,3 @@
+<tag1> <tag2> <tag3> {phrase blablablalba UN test}
+<tag1> <tag4> <tag9> {phrase DEUX test}
+<tag9> <tagD> <tag3> {phrase TROIS test}
