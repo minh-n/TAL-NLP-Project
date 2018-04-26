@@ -44,6 +44,9 @@ def modeOne(listModeOne, answerModeOne, appendString):
 	
 	return answer
 
+
+
+
 def answerVerb(sentString, verb):
 	ans = ""
 	temp = []
@@ -187,11 +190,58 @@ def createDictSubject():
 			dict[line] = "subject"    
 	return dict
 
+def createDictTagList():
+
+	dictTagList = {}
+	with open("../data/dataModeThreeAnswers/botPhrases.txt", "r") as fp:
+		for line in fp.readlines():
+			if line.strip() == "": continue 		#skipping empty lines
+			
+			linelen = len(line)-1               	#removing \n
+			line = line[:linelen]
+			
+			#here we should be able to recognize each tag
+			#we should put the tags into a list
+			#and the sentence into a string
+			#and then combine the two somehow
+
+			tag = extractTag(line)
+			sentence = extractSentence(line)
 
 
-def tokenizeQuestion():
-	return
 
+	return dictTagList
+
+
+
+def extractTag(line):
+	tag = re.findall('<\S+>', line)
+	tagClean = []
+
+	for string in tag:		#removing < and >
+		string = re.sub('<', '', string)
+		string = re.sub('>', '', string)
+		tagClean.append(string)
+
+	if len(tagClean)>0:
+		print("TAGS : ")
+		print(tagClean)
+
+	return tagClean
+
+
+def extractSentence(line):
+	sentence = re.findall('{.+}', line)
+	sentenceClean = []
+	for string in sentence:		#removing { and }
+		string = re.sub('{', '', string)
+		string = re.sub('}', '', string)
+		sentenceClean.append(string)
+
+	print("SENTENCES : ")
+	print(sentenceClean)
+
+	return sentenceClean
 
 #tokenize a given sentence, using nltk's word_tokenize 
 def tokenizeSentence(sent):
@@ -232,6 +282,8 @@ if __name__=="__main__":
 	answerInventory = readDataLine("../data/dataModeTwoAnswers/answerInventory.txt")
 	answerEnvironment = readDataLine("../data/dataModeTwoAnswers/answerEnvironment.txt")
 	answerInfo = readDataLine("../data/dataModeTwoAnswers/answerInfo.txt")
+
+	dictTag = createDictTagList()
 
 	while(user != "quit"):
 		user = raw_input("User: ")

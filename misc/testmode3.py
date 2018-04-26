@@ -56,35 +56,7 @@ def answerModeThree(tagList, context):
 	
 	return answer, context
 
-
-def createTagList():
-
-	dictTagList = {}
-	with open("../data/answerModeThree/answer.txt", "r") as fp:
-		for line in fp.readlines():
-			if line.strip() == "": continue 		#skipping empty lines
-			
-			linelen = len(line)-1               	#removing \n
-			line = line[:linelen]
-			
-			#here we should be able to recognize each tag
-			#we should put the tags into a list
-			#and the sentence into a string
-			#and then combine the two somehow
-
-
-			patternTagList = re.compile(r'<.+>')			
-
-			patternTag = re.compile(r'{.+}')			
-
-
-
-			dictTagList[line] = element
-
-
-	return dictTagList
-
-
+	
 def dispTagList:
 	return
 
