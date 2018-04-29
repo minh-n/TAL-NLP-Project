@@ -91,7 +91,7 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 	
 	currentWord = ""
 
-	#for cle, value in dictModeTwo.items():
+	#for cle, value in dictModeTwo.items(): #test print
 		#print("mot : {}, tag : {}".format(cle, value))
 
 	sentStr = " ".join(sent)
@@ -103,11 +103,11 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 	if answer == "":
 		for word in sent:
 			if word in dictModeTwo:
-				currentWord = word 			#an useful word is memorized
+				currentWord = word 		#an useful word is memorized
 				tag = dictModeTwo[word]
 				break
 
-	if tag != None:						#computing the answer depending on its tag
+	if tag != None:				#computing the answer depending on its tag
 		if tag == "tagAI.txt":
 			answer = modeOne(answerAI, answerModeTwo, None)
 		elif tag == "tagCharacter.txt":
@@ -122,11 +122,11 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 			print("DEBUG : tagging error (this line should not appear)!")
 	return answer
 
-#
+#?
 def contains(word):
 	return
 
-
+#?
 def modeThree():
 	return
 

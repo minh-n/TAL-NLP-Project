@@ -5,7 +5,7 @@
 import os
 import re
 
-#read lines from a file and storing them into a list.
+#Reads lines from a file and storing them into a list.
 def readDataLine(fname):
 
 	linesRead = []	
@@ -16,8 +16,11 @@ def readDataLine(fname):
 
 	return linesRead
 
+#----------------------
+#-------MODE TWO-------
+#----------------------
 
-#mode two dict
+#Creates a dictionary of every words from each of the 5 txt files
 def createDict():
 	dict = {}
 	for element in os.listdir("../data/dataModeTwo"):
@@ -29,7 +32,7 @@ def createDict():
 				dict[line] = element    
 	return dict
 
-#mode two 'be' verbs
+#Creates a dictionary of 'be' verbs (am, are, is...)
 def createDictVerb():
 	dict = {}
 	with open("../data/tagVerb.txt", "r") as fp:
@@ -40,7 +43,8 @@ def createDictVerb():
 			dict[line] = "verb"    
 	return dict
 
-#mode two subjects
+#Creates a dictionary of subjects (I, you...)
+#----------------UNUSED !!!!!!
 def createDictSubject():
 	dict = {}
 	with open("../data/tagSubject.txt", "r") as fp:
@@ -56,7 +60,7 @@ def createDictSubject():
 #------MODE THREE------
 #----------------------
 
-#mode three
+#Extracts tag
 def extractTag(line):
 	tag = re.findall('<\S+>', line)
 	tagClean = []
@@ -66,9 +70,9 @@ def extractTag(line):
 		string = re.sub('>', '', string)
 		tagClean.append(string)
 
-	if len(tagClean)>0:
-		print("TAGS : ")
-		print(tagClean)
+	#if len(tagClean)>0: 
+	#	print("debugTAGS : ")
+	#	print(tagClean)
 
 	return tagClean
 
@@ -81,9 +85,8 @@ def extractSentence(line):
 		string = re.sub('}', '', string)
 		sentenceClean.append(string)
 
-	print("SENTENCES : ")
-	print(sentenceClean)
-
+	#print("debugSENTENCES : ")
+	#print(sentenceClean)
 	return sentenceClean
 
 #mode three

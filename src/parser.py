@@ -85,8 +85,6 @@ def write_tab_separated_file(rows, fname):
             fp.write("\t".join(row)) 
             fp.write("\n")
 
-
-
 #tokenize a given sentence, using nltk's word_tokenize 
 def tokenizeSentence(sent):
 
@@ -107,17 +105,3 @@ def tokenise_en(sent):
     sent = re.sub("((^| )[\.\?\!]) ([\.\?\!]( |$))", r"\1\2", sent) # then restick several fullstops ... or several ?? or !!
     sent = sent.split() # split on whitespace
     return sent
-
-
-
-
-
-
-#tab = read_paragraph_file("./TD1_files/personal_pronouns.fr.tsv")
-#write_paragraph_file(tab, "blablatab")
-
-#texte = read_paragraph_file("./TD1_files/alice.en.paras")
-#write_paragraph_file(texte, "blabla")
-
-#listname = read_word_list_file("./TD1_files/welsh_places.en.list")
-#write_paragraph_file(listname, "blabla2")
