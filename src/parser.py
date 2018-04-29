@@ -1,3 +1,14 @@
+#
+#
+#
+
+import nltk 
+from nltk.tokenize import word_tokenize
+
+
+#to run the program using NLTK, downloading an extra package may be needed:
+#(python/py3) -m nltk.downloader 'punkt'
+
 
 def read_paragraph_file(fname):
 
@@ -75,6 +86,13 @@ def write_tab_separated_file(rows, fname):
             fp.write("\n")
 
 
+
+#tokenize a given sentence, using nltk's word_tokenize 
+def tokenizeSentence(sent):
+
+    sentWordList = word_tokenize(sent)
+
+    return sentWordList
 
 
 def tokenise_en(sent):
