@@ -1,6 +1,8 @@
-<ppr> <parallel> <tropppr> {Toc toc toc toc} 
-<vnr> <pasvnr> <stephanie> {Abah ahbah} 
-<abah> <thibal> <communisme> {qui t'a dit de rentrer jvais te}
-
-<p1> <p2> {phrase test qui correspond à p1, p2}
-<p1> <p2> <tagCharacter> <tagCharacter> {phrase test qui correspond à Tommy, Wiseau}
+<tagCharacter> {Tommy is alone. one tagChar and only one}
+<tagCharacter> <tagEmotion> {Tommy has emotions tagChar and tagEmotion}
+<p1> <tagEnvironment> {impossible sentece}
+<tagEnvironment> <tagCharacter> {Tommy is in Room tagEnvi and tagChar}
+<tagCharacter> <tagEnvironment> {Tommy is in Room tagChar and tagEnvi}
+<tagCharacter> {Tommy is alone. one tagChar and only one}
+<tagCharacter> <tagCharacter> <tagCharacter> <tagCharacter> {Tommy is with four other tagChar.}
+<tagEnvironment> <tagCharacter> <tagCharacter> {Tommy is in Room with another person}

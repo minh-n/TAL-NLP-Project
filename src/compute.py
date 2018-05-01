@@ -4,6 +4,8 @@
 
 import random
 import re
+from itertools import permutations
+
 
 #Compute an answer for mode one and two depending on the input
 def modeOne(listModeOne, answerModeOne, appendString):
@@ -132,12 +134,25 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 #------MODE THREE------
 #----------------------
 
+def getlistPermutations(listTags):
+
+	listPermut = []
+
+	tagLen = len(listTags)
+	if tagLen > 2:
+		listPermut = list(permutations(listTags, tagLen-1))
+	elif tagLen == 2:
+		listPermut = list(permutations(listTags, 2))
+	else:
+		listPermut = listTags
+
+
+	return listPermut
+
 
 def getTagsFromSent(sent, dictThreeLex):
 
 	listTags = []
-	#listTags.append("p1")
-	#listTags.append("p2")
 
 	for word in sent:
 		if word in dictThreeLex:
@@ -145,14 +160,27 @@ def getTagsFromSent(sent, dictThreeLex):
 
 	return listTags
 
-
 def getNumberFromTagList(listTags, dictThreeTag):
 
 	number = -1
-	for key, value in dictThreeTag.iteritems(): 			#key is a number between 0 and n, corresponding to an existing list of tags
-		if listTags == value:
-			number = key
+	ansFound = False
+	iteCounter = 0
+	itePermut = 0
 
+	for key, value in dictThreeTag.iteritems(): 		#key is a number between 0 and n, corresponding to an existing list of tags
+		
+		print("value actual tags")
+		print(value)
+		if iteCounter > len(listTags)-1:					
+			iteCounter = 0										
+					
+		elif set(listTags) == set(value):
+			number = key
+			ansFound = True
+			break
+
+	#if no answer is found, we proceed with the program and will remove some tags
+	#or ask the user for another input
 	return number
 
 def getAnswerFromNumber(number, dictThreeSentence):
@@ -161,6 +189,8 @@ def getAnswerFromNumber(number, dictThreeSentence):
 
 	if number == -1:
 		print("DEBUG : liste de tags introuvable")
+	elif number == -2:
+		print("DEBUG : error tag combinations")
 	else:
 		answer = dictThreeSentence.get(number)
 		ansStr = " ".join(answer)
@@ -171,13 +201,10 @@ def getAnswerFromNumber(number, dictThreeSentence):
 #Compute an answer for the mode 3
 def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence):
 
-
 	listTags = []
 	
 	listTags = getTagsFromSent(sent, dictThreeLex)
-
 	number = getNumberFromTagList(listTags, dictThreeTag)
-
 	answer = getAnswerFromNumber(number, dictThreeSentence)
 
 	return answer
