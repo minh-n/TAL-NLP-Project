@@ -1,3 +1,6 @@
 <ppr> <parallel> <tropppr> {Toc toc toc toc} 
 <vnr> <pasvnr> <stephanie> {Abah ahbah} 
 <abah> <thibal> <communisme> {qui t'a dit de rentrer jvais te}
+
+<p1> <p2> {phrase test qui correspond à p1, p2}
+<p1> <p2> <tagCharacter> <tagCharacter> {phrase test qui correspond à Tommy, Wiseau}

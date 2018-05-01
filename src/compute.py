@@ -5,6 +5,7 @@
 import random
 import re
 
+#Compute an answer for mode one and two depending on the input
 def modeOne(listModeOne, answerModeOne, appendString):
 
 	loop = True
@@ -22,6 +23,10 @@ def modeOne(listModeOne, answerModeOne, appendString):
 	
 	return answer
 
+#----------------------
+#-------MODE TWO-------
+#----------------------
+#
 def answerVerb(sentString, verb):
 	ans = ""
 	temp = []
@@ -91,7 +96,6 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 	answer = ""
 	
 	currentWord = ""
-
 	#for cle, value in dictModeTwo.items(): #test print
 		#print("mot : {}, tag : {}".format(cle, value))
 
@@ -123,11 +127,65 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 			print("DEBUG : tagging error (this line should not appear)!")
 	return answer
 
-#?
-def contains(word):
-	return
 
-#?
-def modeThree():
-	return
+#----------------------
+#------MODE THREE------
+#----------------------
+
+
+def getTagsFromSent(sent, dictThreeLex):
+
+	listTags = []
+	#listTags.append("p1")
+	#listTags.append("p2")
+
+	for word in sent:
+		if word in dictThreeLex:
+			listTags.append(dictThreeLex[word])
+
+	return listTags
+
+
+def getNumberFromTagList(listTags, dictThreeTag):
+
+	number = -1
+	for key, value in dictThreeTag.iteritems(): 			#key is a number between 0 and n, corresponding to an existing list of tags
+		if listTags == value:
+			number = key
+
+	return number
+
+def getAnswerFromNumber(number, dictThreeSentence):
+
+	ansStr = "DEBUG : phrase introuvable"
+
+	if number == -1:
+		print("DEBUG : liste de tags introuvable")
+	else:
+		answer = dictThreeSentence.get(number)
+		ansStr = " ".join(answer)
+
+	return ansStr
+
+
+#Compute an answer for the mode 3
+def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence):
+
+
+	listTags = []
+	
+	listTags = getTagsFromSent(sent, dictThreeLex)
+
+	number = getNumberFromTagList(listTags, dictThreeTag)
+
+	answer = getAnswerFromNumber(number, dictThreeSentence)
+
+	return answer
+
+
+
+
+
+
+
 

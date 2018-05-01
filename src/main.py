@@ -29,8 +29,8 @@ if __name__=="__main__":
 	dictThreeLex = data.createDictThreeLex()
 	dictThreeTag, dictThreeSentence = data.createDictTagSent()
 
-	print("Dict three Lex\n")
-	print(dictThreeLex)
+	#print("Dict three Lex\n")
+	#print(dictThreeLex)
 
 	user = ""
 	
@@ -46,10 +46,15 @@ if __name__=="__main__":
 			printAnswer("Goodbye!")
 		else:
 			sent = parser.tokenizeSentence(user)
-			answerModeTwo = compute.modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
-			if answerModeTwo != "":
-				printAnswer(answerModeTwo)
+
+			answerModeThree = compute.modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence)
+			if answerModeThree != "":
+				printAnswer(answerModeThree)
 			else:
-				answerModeOne = compute.modeOne(listModeOne, answerModeOne, None)
-				printAnswer(answerModeOne)
-		
+				answerModeTwo = compute.modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
+				if answerModeTwo != "":
+					printAnswer(answerModeTwo)
+				else:
+					answerModeOne = compute.modeOne(listModeOne, answerModeOne, None)
+					printAnswer(answerModeOne)
+			
