@@ -3,6 +3,7 @@
 #
 
 import random
+import re
 
 def modeOne(listModeOne, answerModeOne, appendString):
 

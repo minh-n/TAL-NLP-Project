@@ -16,6 +16,14 @@ def readDataLine(fname):
 
 	return linesRead
 
+#Removing \n at the end of each word
+def removeEndLine(word):
+	linelen = len(word)
+	if word[linelen-1] == '\n':				#removing \n 
+		linelen = len(word)-1               	
+		word = word[:linelen]
+	return word
+
 #----------------------
 #-------MODE TWO-------
 #----------------------
@@ -27,8 +35,8 @@ def createDict():
 		with open("../data/dataModeTwo/" + element, "r") as fp:
 			for line in fp.readlines():
 				if line.strip() == "": continue 		#skipping empty lines
-				linelen = len(line)-1               	#removing \n 
-				line = line[:linelen]
+				line = removeEndLine(line)
+
 				dict[line] = element    
 	return dict
 
@@ -38,20 +46,20 @@ def createDictVerb():
 	with open("../data/tagVerb.txt", "r") as fp:
 		for line in fp.readlines():
 			if line.strip() == "": continue 			#skipping empty lines
-			linelen = len(line)-1               		#removing \n 
-			line = line[:linelen]
+			line = removeEndLine(line)
+
 			dict[line] = "verb"    
 	return dict
 
 #Creates a dictionary of subjects (I, you...)
-#----------------UNUSED !!!!!!
+#---------------------------------------------------UNUSED !!!!!!
 def createDictSubject():
 	dict = {}
 	with open("../data/tagSubject.txt", "r") as fp:
 		for line in fp.readlines():
 			if line.strip() == "": continue 			#skipping empty lines
-			linelen = len(line)-1               		#removing \n 
-			line = line[:linelen]
+			line = removeEndLine(line)
+
 			dict[line] = "subject"    
 	return dict
 
@@ -60,7 +68,24 @@ def createDictSubject():
 #------MODE THREE------
 #----------------------
 
-#Extracts tag
+#Creates a dictionary of every words from each of the 5 txt files
+def createDictThreeLex():
+	dictThreeLex = {}
+
+	for tag in os.listdir("../data/dataModeThree"):
+		if not tag.startswith('.'):
+			with open("../data/dataModeThree/" + tag, "r") as fp:
+				for word in fp.readlines():
+					if word.strip() == "": continue 		#skipping empty lines
+					
+					word = removeEndLine(word)
+
+					tag = tag.replace(".txt", "")			#removing .txt from tag names
+					dictThreeLex[word] = tag
+
+	return dictThreeLex
+
+#Extracts tags from a <tag1><tag2>{sentence} line
 def extractTag(line):
 	tag = re.findall('<\S+>', line)
 	tagClean = []
@@ -69,14 +94,9 @@ def extractTag(line):
 		string = re.sub('<', '', string)
 		string = re.sub('>', '', string)
 		tagClean.append(string)
-
-	#if len(tagClean)>0: 
-	#	print("debugTAGS : ")
-	#	print(tagClean)
-
 	return tagClean
 
-#
+#Extracts a sentence from a <tag1><tag2>{sentence} line
 def extractSentence(line):
 	sentence = re.findall('{.+}', line)
 	sentenceClean = []
@@ -84,27 +104,26 @@ def extractSentence(line):
 		string = re.sub('{', '', string)
 		string = re.sub('}', '', string)
 		sentenceClean.append(string)
-
-	#print("debugSENTENCES : ")
-	#print(sentenceClean)
 	return sentenceClean
 
-#mode three
-def createDictTagList():
+#Creates a dictionary from tags and sentences
+def createDictTagSent():
 
-	dictTagList = {}
+	dictThreeTag = {}
+	dictThreeSentence = {}
+	count = 0
+
 	with open("../data/dataModeThreeAnswers/botPhrases.txt", "r") as fp:
 		for line in fp.readlines():
 			if line.strip() == "": continue 			#skipping empty lines
 			
-			linelen = len(line)-1               		#removing \n
-			line = line[:linelen]
+			line = removeEndLine(line)
 			
-			#here we should be able to recognize each tag
-			#we should put the tags into a list
-			#and the sentence into a string
-			#and then combine the two somehow
-
-			tag = extractTag(line)
+			tag = extractTag(line) 						#recognizing each tag
 			sentence = extractSentence(line)
-	return dictTagList
+
+			dictThreeTag[count] = tag 					#separating the two:
+			dictThreeSentence[count] = sentence 		#one dict for the tags and one for the sentence
+			count = count + 1 					  		#each have the same counter
+
+	return (dictThreeTag, dictThreeSentence)

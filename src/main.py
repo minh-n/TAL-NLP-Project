@@ -22,8 +22,16 @@ if __name__=="__main__":
 	listModeOne = data.readDataLine("../data/dataModeOne.txt")
 	answerModeOne = ""
 	answerModeTwo = ""
+
 	dictModeTwo = data.createDict()
 	dictVerb = data.createDictVerb()
+
+	dictThreeLex = data.createDictThreeLex()
+	dictThreeTag, dictThreeSentence = data.createDictTagSent()
+
+	print("Dict three Lex\n")
+	print(dictThreeLex)
+
 	user = ""
 	
 	answerAI = data.readDataLine("../data/dataModeTwoAnswers/answerAI.txt")
@@ -32,12 +40,10 @@ if __name__=="__main__":
 	answerEnvironment = data.readDataLine("../data/dataModeTwoAnswers/answerEnvironment.txt")
 	answerInfo = data.readDataLine("../data/dataModeTwoAnswers/answerInfo.txt")
 
-	dictTag = data.createDictTagList()
-
 	while(user != "quit"):
 		user = raw_input("User: ")
 		if user == "quit":
-			printAnswer("Bye")
+			printAnswer("Goodbye!")
 		else:
 			sent = parser.tokenizeSentence(user)
 			answerModeTwo = compute.modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
