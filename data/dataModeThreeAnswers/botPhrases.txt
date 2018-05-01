@@ -6,3 +6,4 @@
 <tagCharacter> {Tommy is alone. one tagChar and only one}
 <tagCharacter> <tagCharacter> <tagCharacter> <tagCharacter> {Tommy is with four other tagChar.}
 <tagEnvironment> <tagCharacter> <tagCharacter> {Tommy is in Room with another person}
+<tagEnvironment> <tagWelcome> <tagCharacter> {Hello salut ################}

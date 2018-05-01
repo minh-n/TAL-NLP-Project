@@ -163,34 +163,43 @@ def getTagsFromSent(sent, dictThreeLex):
 def getNumberFromTagList(listTags, dictThreeTag):
 
 	number = -1
-	ansFound = False
 	iteCounter = 0
 	itePermut = 0
 
 	for key, value in dictThreeTag.iteritems(): 		#key is a number between 0 and n, corresponding to an existing list of tags
 		
-		print("value actual tags")
-		print(value)
+		#print("value actual tags")
+		#print(value)
 		if iteCounter > len(listTags)-1:					
 			iteCounter = 0										
 					
 		elif set(listTags) == set(value):
 			number = key
-			ansFound = True
 			break
 
 	#if no answer is found, we proceed with the program and will remove some tags
 	#or ask the user for another input
 	return number
 
-def getAnswerFromNumber(number, dictThreeSentence):
+def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags):
 
 	ansStr = "DEBUG : phrase introuvable"
+	numberRoundTwo = -1									#in case we didn't find a suitable answer the first time
 
-	if number == -1:
-		print("DEBUG : liste de tags introuvable")
-	elif number == -2:
-		print("DEBUG : error tag combinations")
+	if number < 0:
+		#print("DEBUG : liste de tags introuvable. Relancement")
+		listPermut = getlistPermutations(listTags)
+
+		for element in listPermut:
+			numberRoundTwo = getNumberFromTagList(element, dictThreeTag)
+			if numberRoundTwo > 0:
+				answer = dictThreeSentence.get(numberRoundTwo)
+				ansStr = " ".join(answer)
+				break
+			elif numberRoundTwo < 0:
+				#print("Please reformuler")
+				ansStr = ""
+
 	else:
 		answer = dictThreeSentence.get(number)
 		ansStr = " ".join(answer)
@@ -198,21 +207,16 @@ def getAnswerFromNumber(number, dictThreeSentence):
 	return ansStr
 
 
-#Compute an answer for the mode 3
+#Compute an answer for mode 3
 def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence):
 
 	listTags = []
 	
 	listTags = getTagsFromSent(sent, dictThreeLex)
 	number = getNumberFromTagList(listTags, dictThreeTag)
-	answer = getAnswerFromNumber(number, dictThreeSentence)
+	answer = getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags)
 
 	return answer
-
-
-
-
-
 
 
 
