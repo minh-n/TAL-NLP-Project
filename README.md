@@ -18,7 +18,7 @@ Mode 2 is a simplified Mode 3 : in case Mode 3 is not able to compute an answer,
 
 Mode 1 does not use tag recognition and whatever the user says, the chatbot will answer with 'backchannels', such as `Uhh..` or `Hmm…`.
 
-Further explanations can be found in French (`/misc/rapport.pdf`).
+Further explanations can be found in French (`/misc/Rapport.pdf`).
 
 ## Tech used
 
@@ -26,19 +26,29 @@ The NLTK library was used, especially its tokenize function: it is able to separ
 
 ## How to run?
 
-To run the program using NLTK, downloading an extra package may be required: 
+To run the program, several modules are to be used: NLTK, NumPy and Re. For NLTK, downloading an extra package may be required: 
 
 `pip install nltk`
 `python -m nltk.downloader 'punkt'`
 
-The package is included as well with this git (`/nltk_data/tokenizers`). In case the NLTK downloader is broken, you can copy the nlkt_data folder into:
-- Windows: `C:\nlkt_data\tokenizers`
-- Mac OS: `/usr/local/share/nlkt_data/tokenizers`
-- Unix: `/usr/share/nlkt_data/tokenizers`
+The `punkt` package is included as well with this git (`/nltk_data/tokenizers`). In case the NLTK downloader is broken, you can copy the whole folder into:
+- Windows: `C:\nltk_data\tokenizers`
+- Mac OS: `/usr/local/share/nltk_data/tokenizers`
+- Unix: `/usr/share/nltk_data/tokenizers`
 
 The command used to run the project is:
 
 `python main.py`
+
+## Use examples
+
+When running the chatbot, the user can ask questions such as:
+- Where is Annie?
+- What is she doing?
+
+To which the chatbot will be able to answer:
+- Annie is in the kitchen.
+- Annie is preparing food.
 
 ## Troubleshooting
 
@@ -118,3 +128,5 @@ Adrien Lavillonnière (`Veados`)
 Corentin Manscour (`neofoetus`)
 
 Hien Minh Nguyen (`shipanda01`)
+
+Polytech-Paris Sud

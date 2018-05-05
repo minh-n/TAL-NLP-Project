@@ -51,8 +51,7 @@ def createDictVerb():
 			dict[line] = "verb"    
 	return dict
 
-#Creates a dictionary of subjects (I, you...)
-#---------------------------------------------------UNUSED !!!!!!
+#Legacy function. Creates a dictionary of subjects (I, you...). Actually unused!
 def createDictSubject():
 	dict = {}
 	with open("../data/tagSubject.txt", "r") as fp:
