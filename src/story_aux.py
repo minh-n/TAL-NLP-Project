@@ -259,23 +259,37 @@ class Character:
 
 	#mode : string
 	def talk(self, person, c, mode="default"):
+		if r.randint(0,10) != 0:
+			return 0
+
 		self_idx = c.environment.characters.index(self)
 		person_idx = c.environment.characters.index(person)
 
+		print("\tBot : "+self.name+" and "+person.name+" are talking together\n")
+
 		if mode == "default" :
-			#print random_conv or real_talk
 
 			if r.randint(0,1) == 1 :
 				self.relationships[person_idx] += 1;
 				person.relationships[self_idx] += 1;
+				if r.randint(0,2) == 2 :
+					print("\tBot : Looks like they agree with each other\n")
+
 			else :
 				self.relationships[person_idx] -= 1;
 				person.relationships[self_idx] -= 1;
+				if r.randint(0,2) == 2 :
+					print("\tBot : It seems they are arguing pretty bad\n")
 
 		else :
-			#print cheerup
+
+			print("\tBot : "+self.name+" is trying to cheer "+person.name+" up\n")
 			value = r.randint(0,2)
+			self.relationships[person_idx] += value;
 			person.relationships[self_idx] += value;
+			if (person.mind != "determined") & (person.mind != "joyful"):
+				idx = mind_enum.index(person.mind)
+				person.mind = mind_enum[idx+value]
 
 		return 0
 
@@ -299,6 +313,9 @@ class Character:
 			self.hydration+= -1
 			self.nutrition+= -0.5
 			self.sleep+= -0.5
+
+			in_mindstate = self.mind
+			out_mindstate = None
 
 			#2
 			if (c.time % 10 == 0) & (c.time != 0):
@@ -325,11 +342,11 @@ class Character:
 
 			if self.mind == "depressed":
 				dead = False
-				if r.randint(0,8) == 0:
+				if r.randint(0,10) == 0:
 					for i in range(0,5):
 						if (i != self_idx) & (self.relationships[i] == 0):
 							c.environment.characters[i].alive = False
-							#print("M U R D E R\n")
+							print("\tBot : "+self.name+"  M U R D E R E D  "+c.environment.characters[i].name+"\n")
 							self.mind = "apathetic"
 							dead = True
 							break
@@ -346,7 +363,7 @@ class Character:
 
 					if dead == False:
 						self.alive = False
-						#print("S U I C I D E\n")
+						print("\tBot : "+self.name+"  K I L L E D  T H E M S E L V E S\n")
 
 				else:
 					self.move(c.environment.rooms[self_idx+5])
@@ -446,11 +463,18 @@ class Character:
 
 			self.move(c.environment.rooms[r.randint(0,9)])
 
+			out_mindstate = self.mind
+			if ((in_mindstate == out_mindstate) & (self.mind != "determined")) & (r.randint(0,2) == 0):
+				idx = mind_enum.index(self.mind)
+				self.mind = mind_enum[idx+1]
+
+
 
 
 		else:
-			self.alive == False
-			#print("D E A D\n")
+			if self.alive == True:
+				print("\tBot :"+self.name+" is D E A D\n")
+			self.alive = False
 
 		f.close()
 

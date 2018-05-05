@@ -1,0 +1,10 @@
+kitchen
+living
+lounge
+bedroom
+roof
+toilet
+toilets
+bathroom
+
+

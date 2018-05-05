@@ -66,17 +66,19 @@ if __name__=="__main__":
 
 	#main while loop
 	while(userMenu != "quit"):
-
+		print("\n\n--------------------\n\n")
 		print("I'm Storybot and I will tell you a story. Please choose between 1, 2 or 3. Type \"quit\" if you want to exit.")
 		print("1: the story mode.")
 		print("2: some background for the story.")
 		print("3: technical details about this project.")
-		print("quit: exiting the program.")
-		userMenu = input("Your choice:")
-
+		print("quit: exit the program.\n")
+		userMenu = input("Your choice: ")
+		print("\n")
 		if userMenu == '1':
-			print("\n\n--------\n\nMaria, Annie, Antoine, Jeffery and Laura are stuck in a house. Discover their story... or type quit to go back.")
-			print("You can ask me a question about their state of mind, their location or their inventory.")
+			print("\n\n---------STORY MODE---------\n\n")
+
+			print("\nMaria, Annie, Antoine, Jeffery and Laura are stuck in a house. Discover their story... or type quit to go back.")
+			print("You can ask me a question about who they are, their state of mind, their location or their inventory.\n")
 			while(user != "quit"):
 				user = input("You: ")	#the user will be able to quit the program by typing 'quit'
 				user = user.lower()
@@ -126,7 +128,7 @@ if __name__=="__main__":
 		elif userMenu == '2':
 			print("\n\n--------STORY BACKGROUND---------\n\n")
 			print("Maria, Annie, Antoine, Jeffery and Laura are stuck in a house. They're interacting with each other and figuring out how to survive.")
-			print("\nIt seems like a powerful AI is watching every of their steps, and influencing them in their daily lives...")
+			print("\nIt seems like a powerful AI is watching every of their steps, and influencing them in their daily lives...\n\n\n")
 		elif userMenu == '3':
 			print("\n\n--------TECHNICAL DETAILS---------\n\n")
 
@@ -136,7 +138,7 @@ if __name__=="__main__":
 
 			print("\nMode 1 does not use tag recognition and whatever the user says, the chatbot will answer with 'backchannels', such as `Uhh..` or `Hmm…`.")
 
-			print("\nFurther explanations can be found in French (`/misc/Rapport.pdf`).")
+			print("\nFurther explanations can be found in French (`/misc/Rapport.pdf`).\n\n\n")
 
 
 

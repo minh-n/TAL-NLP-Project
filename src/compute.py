@@ -279,13 +279,15 @@ def getState(currentChar, whichState):
 def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState, contextState):
 
 	if whichState == "":
-		whichState = contextState
+		if contextState != "":
+			whichState = contextState
 	else:
 		contextState = whichState
 
 	simuState = ""
 	simuYesno = ""
 	simuAction = ""
+	charFeatures = ""
 	simuLocation = contextPlace
 
 	#Antoine
@@ -293,30 +295,39 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		currentChar = characters[0]
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
+		charFeatures = "a young man, late twenties. He likes chocolate cake and the movie \"The Room\"" 
 
 	#Laura
 	elif contextChar == "Laura":
 		currentChar = characters[1]
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
+		charFeatures = "Miss Polytech 2017, she was sent to this house to seek the Holy Grail" 
+
 
 	#Maria
 	elif contextChar == "Maria":
 		currentChar = characters[2]
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
+		charFeatures = "a 17-year-old high school girl. It seems that she likes Scott Pilgrim" 
+
 
 	#Annie
 	elif contextChar == "Annie":
 		currentChar = characters[3]
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
+		charFeatures = "secretly a Titan, but shhhh." 
+
 
 	#Jeffery
 	elif contextChar == "Jeffery":
 		currentChar = characters[4]
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
+		charFeatures = "a pro Hearthstone player. He likes to play even if he has a project to turn in for tomorrow" 
+
 
 	#replacing regex with context and inputs
 	pattern = re.compile(r'\%char')
@@ -335,13 +346,11 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		answer = patternYes.sub("", answer)
 		answer = patternPlace.sub(simuLocation, answer)
 	else:									#character is not in contextPlace
-		answer = pattern.sub(" not ", answer)
-		answer = pattern.sub(contextPlace, answer)
+		answer = patternYes.sub("not", answer)
+		answer = patternPlace.sub(contextPlace, answer)
 
-
-
-	#pattern = re.compile(r'\%action')
-	#answer = pattern.sub(simuAction, answer)
+	pattern = re.compile(r'\%features')
+	answer = pattern.sub(charFeatures, answer)
 
 	#pattern = re.compile(r'\%object')
 	#answer = pattern.sub(contextObject, answer)

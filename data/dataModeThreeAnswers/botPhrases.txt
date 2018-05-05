@@ -1,3 +1,5 @@
+<greetings> {Hello, human. Ask me a question...}
+
 <inventory> <character> <questionMark> {%char has %object.}
 
 <character> <mind_state> <questionMark> {%char is feeling %state.}
@@ -26,4 +28,5 @@
 <where> <character> <questionMark> {%char is in %room.}
 <character> <room> <questionMark> {%char is %yesno in %room.}
 
-<can> <character> <action> ???
+<what> <tell> <about> <character> <questionMark> {%char is %features.}
+<tell> <character> <questionMark> {%char is %features.}
