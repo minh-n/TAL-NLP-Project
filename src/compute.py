@@ -7,14 +7,14 @@ import re
 from itertools import permutations
 
 
-#Compute an answer for mode one and two depending on the input
-def modeOne(listModeOne, answerModeOne, appendString):
+#Compute an answer for mode one or two, depending on the input
+def modeOne(listMode, answerModeOne, appendString):
 
 	loop = True
 
 	while(loop):
-		answerNum = random.randint(0,len(listModeOne)-1)
-		answer = listModeOne[answerNum]
+		answerNum = random.randint(0,len(listMode)-1)
+		answer = listMode[answerNum]
 		if(answer != answerModeOne):
 			loop = False
 		if(appendString != None):
@@ -29,14 +29,13 @@ def modeOne(listModeOne, answerModeOne, appendString):
 #-------MODE TWO-------
 #----------------------
 #
+
+#Compute an answer for the 'be' verb
 def answerVerb(sentString, verb):
 	ans = ""
 	temp = []
 	temp = andProb(sentString, temp)
 	
-	#for part in temp:
-	#	print(part)
-
 	for eachPart in temp:
 		if "I" in eachPart:
 			tmp = " ".join(eachPart)
@@ -80,7 +79,7 @@ def answerVerb(sentString, verb):
 
 	return ans
 
-#
+#Recognizes several parts of a sentence, separated by 'and'
 def andProb(sentString, temp):
 	if "and" in sentString:
 		firstPart = sentString[:sentString.index("and")]
@@ -92,14 +91,11 @@ def andProb(sentString, temp):
 
 	return temp
 
-#
+#The main mode 2 function
 def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo):
 	tag = None
 	answer = ""
-	
 	currentWord = ""
-	#for cle, value in dictModeTwo.items(): #test print
-		#print("mot : {}, tag : {}".format(cle, value))
 
 	sentStr = " ".join(sent)
 
@@ -110,11 +106,11 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 	if answer == "":
 		for word in sent:
 			if word in dictModeTwo:
-				currentWord = word 		#an useful word is memorized
+				currentWord = word 				#an useful word is memorized
 				tag = dictModeTwo[word]
 				break
 
-	if tag != None:				#computing the answer depending on its tag
+	if tag != None:								#computing the answer depending on its tag
 		if tag == "tagAI.txt":
 			answer = modeOne(answerAI, answerModeTwo, None)
 		elif tag == "tagCharacter.txt":
@@ -134,10 +130,11 @@ def modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacte
 #------MODE THREE------
 #----------------------
 
+#Returns every possible combinations of tags
+#from a n-length list to a n-1-length list. 
 def getlistPermutations(listTags):
 
 	listPermut = []
-
 	tagLen = len(listTags)
 	if tagLen > 2:
 		listPermut = list(permutations(listTags, tagLen-1))
@@ -149,41 +146,36 @@ def getlistPermutations(listTags):
 
 	return listPermut
 
-
+#Extracts tags from a sentence
 def getTagsFromSent(sent, dictThreeLex):
 
 	listTags = []
-
 	for word in sent:
 		if word in dictThreeLex:
 			listTags.append(dictThreeLex[word])
 
 	return listTags
 
+#Finds the corresponding number for a
+#given a list of tags. If there is none, -1 is returned.
 def getNumberFromTagList(listTags, dictThreeTag):
 
 	number = -1
-	iteCounter = 0
-	itePermut = 0
-
-	for key, value in dictThreeTag.iteritems(): 		#key is a number between 0 and n, corresponding to an existing list of tags
-		
-		#print("value actual tags")
-		#print(value)
-		if iteCounter > len(listTags)-1:					
-			iteCounter = 0										
-					
-		elif set(listTags) == set(value):
+	for key, value in dictThreeTag.iteritems(): 		#key is a number between 0 and n
+		if set(listTags) == set(value):
 			number = key
 			break
 
-	#if no answer is found, we proceed with the program and will remove some tags
-	#or ask the user for another input
+	#if no answer is found, we proceed with the program
+	#and will remove some tags
 	return number
 
+#Computes an answer for mode three.
+#This function is also able to find another corresponding list
+#in case nothing is recognized at first.
 def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags):
 
-	ansStr = "DEBUG : phrase introuvable"
+	ansStr = "" 				 
 	numberRoundTwo = -1									#in case we didn't find a suitable answer the first time
 
 	if number < 0:
@@ -196,9 +188,8 @@ def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags):
 				answer = dictThreeSentence.get(numberRoundTwo)
 				ansStr = " ".join(answer)
 				break
-			elif numberRoundTwo < 0:
-				#print("Please reformuler")
-				ansStr = ""
+			elif numberRoundTwo < 0: 
+				ansStr = ""								#no answer is found. We switch to mode 2 by returning an empty answer.
 
 	else:
 		answer = dictThreeSentence.get(number)
@@ -207,15 +198,18 @@ def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags):
 	return ansStr
 
 
-#Compute an answer for mode 3
+#The main mode 3 function
 def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence):
 
 	listTags = []
 	
+	#TODO context
+
 	listTags = getTagsFromSent(sent, dictThreeLex)
 	number = getNumberFromTagList(listTags, dictThreeTag)
 	answer = getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags)
-
+	print("this sentence's tagList:")
+	print(listTags)
 	return answer
 
 
