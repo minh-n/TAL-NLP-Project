@@ -46,6 +46,15 @@ if __name__=="__main__":
 	contextPlace = ""
 	contextObject = ""
 
+
+	#iterator to link the user input to the story
+	count_input = 0
+
+	#controller of the story, and point of acces to data :
+	c = story.Controller()
+	characters = c.environment.characters
+	rooms = c.environment.rooms
+
 	#main while loop
 	while(user != "quit"): 			
 		user = input("User: ")	#the user will be able to quit the program by typing 'quit'
@@ -55,19 +64,21 @@ if __name__=="__main__":
 		else:
 			sent = parser.tokenizeSentence(user) 	#the user's sentence is tokenized
 
-			answerModeThree, contextChar, contextPlace, contextObject = compute.modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject)
+			answerModeThree, contextChar, contextPlace, contextObject = compute.modeThree(sent, characters, rooms, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject)
 			if answerModeThree != "": 				#if a mode3 answer is returned
 				printAnswer(answerModeThree)
-				print("CurrentMode=3")
+				#print("CurrentMode=3")
 			else:									#else, we switch to mode 2
 				answerModeTwo = compute.modeTwo(sent, dictVerb, dictModeTwo, answerModeTwo, answerAI, answerCharacter, answerInventory, answerEnvironment, answerInfo)
 				if answerModeTwo != "":				#if a mode2 answer is returned
 					printAnswer(answerModeTwo)
-					print("CurrentMode=2")
+					#print("CurrentMode=2")
 
 				else:								#else, we switch to mode 1
 					answerModeOne = compute.modeOne(listModeOne, answerModeOne, None)
 					printAnswer(answerModeOne)
-					print("CurrentMode=1")
+					#print("CurrentMode=1")
 
-			
+
+		if count_input%2 == 0 :
+			c.timeForward(1)

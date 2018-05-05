@@ -62,6 +62,7 @@ Possible areas for improvment would be:
 - adding partial answers the chatbot will combine,
 - fixing typos such as blank spaces before question marks,
 - implementing a 'context' system for the chatbot to remember about the conversation's subject for example,
+- adding question recognition without question marks. Our tagging system relies on the ? at the end of each question,
 - and of course adding more tags and improving the simulation.
 
 

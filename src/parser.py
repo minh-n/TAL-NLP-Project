@@ -5,8 +5,85 @@
 import nltk 
 from nltk.tokenize import word_tokenize
 
+
 #to run the program using NLTK, downloading an extra package may be needed:
 #(python/py3) -m nltk.downloader 'punkt'
+
+
+def read_paragraph_file(fname):
+
+    para = []
+    	
+    #ouverture automatique du fichier
+    with open(fname, "r") as fp:
+
+        for line in fp.readlines():
+            if line.strip() == "": continue 	#on saute les lignes vides
+            para.append(line.strip())	
+
+    return para
+
+def write_paragraph_file(list_paras, fname):
+
+    with open(fname, "w") as fp:
+
+        for line in list_paras:
+            fp.write(line+"\n")
+
+
+def read_word_list_file(fname):
+    motsliste = []
+
+    #ouverture automatique du fichier
+    with open(fname, "r") as fp:
+
+        for line in fp.readlines():
+            word = line.strip() # remove whitespace
+            if word=="": continue #on saute les lignes vides
+            motsliste.append(word)
+
+    return motsliste
+
+def write_word_list_file(motsliste, fname):
+
+    with open(fname, "w") as fp:
+
+        for word in motsliste:
+            fp.write(word+"\n")    
+
+def read_tab_separated_file(fname):
+
+    rows = []
+
+    with open(fname, "r") as fp:
+
+        for line in fp.readlines():
+            line = line.strip() 
+            if line=="": continue 
+            rows.append(line.split("\t")) 
+
+    return rows 
+
+def read_tab_separated_file(fname):
+
+    rows = []
+    with open(fname, "r") as fp:
+
+        for line in fp.readlines():
+            line = line.strip() 
+            if line == "": continue 
+            rows.append(line.split("\t"))
+
+    return rows 
+
+
+def write_tab_separated_file(rows, fname):
+
+    with open(fname, "w") as fp:
+
+        for row in rows:
+            fp.write("\t".join(row)) 
+            fp.write("\n")
 
 #tokenize a given sentence, using nltk's word_tokenize 
 def tokenizeSentence(sent):
@@ -15,7 +92,7 @@ def tokenizeSentence(sent):
 
     return sentWordList
 
-#Legacy tokenise function. Currently unused
+#Legacy tokenize function, currently unused.
 def tokenise_en(sent):
 
     sent = re.sub("([^ ])\'", r"\1 '", sent) # separate apostrophe from preceding word by a space if no space to left
