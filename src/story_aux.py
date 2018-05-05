@@ -35,9 +35,9 @@ state_room_enum = ["tidy", "neutral", "messy", "chaos", "unusable"]
 
 mind_enum = ["depressed", "apathetic", "neutral", "joyful", "determined"]
 
-rand_conv_enum = ["the movie The Room", "existencialism", "what the forest smells like", "the rules of Cards against humanity"]
+rand_conv_enum = ["the movie The Room", "existencialism", "what the forest smells like", "the rules of Cards against humanity"\
+,"what they think of Jeffery", "how painful it is to listen to Annie talk for hours", "how much they hate this closed space"]
 cheruup_enum = ["the time he/she cooked for everyone, and it was delicious", "everybody loving to be around him/her"]
-real_talk_enum = ["what they think of Jeffery", "how painful it is to listen to Annie talk for hours", "how much they hate this closed space"]
 
 
 
@@ -108,6 +108,7 @@ class Character:
 		self.sleep = 5
 		self.relationships = [3,3,3,3,3]
 		self.alive = True
+		self.conv = None
 
 		loc.inhabitants.append(self)
 
@@ -265,25 +266,32 @@ class Character:
 		self_idx = c.environment.characters.index(self)
 		person_idx = c.environment.characters.index(person)
 
-		print("\tBot : "+self.name+" and "+person.name+" are talking together\n")
+		print("\tBot : "+self.name+" and "+person.name+" are talking together")
 
 		if mode == "default" :
+			value = r.randint(0,6)
+			self.conv = rand_conv_enum[value]
+			person.conv = rand_conv_enum[value]
 
 			if r.randint(0,1) == 1 :
 				self.relationships[person_idx] += 1;
 				person.relationships[self_idx] += 1;
 				if r.randint(0,2) == 2 :
-					print("\tBot : Looks like they agree with each other\n")
+					print("\tBot : Looks like they agree with each other")
 
 			else :
 				self.relationships[person_idx] -= 1;
 				person.relationships[self_idx] -= 1;
 				if r.randint(0,2) == 2 :
-					print("\tBot : It seems they are arguing pretty bad\n")
+					print("\tBot : It seems they are arguing pretty bad")
 
 		else :
 
-			print("\tBot : "+self.name+" is trying to cheer "+person.name+" up\n")
+			value = r.randint(0,3)
+			self.conv = rand_conv_enum[value]
+			person.conv = rand_conv_enum[value]
+
+			print("\tBot : "+self.name+" is trying to cheer "+person.name+" up")
 			value = r.randint(0,2)
 			self.relationships[person_idx] += value;
 			person.relationships[self_idx] += value;
@@ -346,7 +354,7 @@ class Character:
 					for i in range(0,5):
 						if (i != self_idx) & (self.relationships[i] == 0):
 							c.environment.characters[i].alive = False
-							print("\tBot : "+self.name+"  M U R D E R E D  "+c.environment.characters[i].name+"\n")
+							print("\tBot : "+self.name+"  M U R D E R E D  "+c.environment.characters[i].name)
 							self.mind = "apathetic"
 							dead = True
 							break
@@ -363,7 +371,7 @@ class Character:
 
 					if dead == False:
 						self.alive = False
-						print("\tBot : "+self.name+"  K I L L E D  T H E M S E L V E S\n")
+						print("\tBot : "+self.name+"  K I L L E D  T H E M S E L V E S")
 
 				else:
 					self.move(c.environment.rooms[self_idx+5])
@@ -473,7 +481,7 @@ class Character:
 
 		else:
 			if self.alive == True:
-				print("\tBot :"+self.name+" is D E A D\n")
+				print("\tBot :"+self.name+" is D E A D")
 			self.alive = False
 
 		f.close()

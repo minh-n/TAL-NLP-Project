@@ -3,82 +3,82 @@ CHARACTERS:
 Antoine
 Aaronson
 dead
-toilets
+kitchen
 *
-neutral
-0.0
+determined
+6.0
 10
-28.0
+18.0
 0
 0
-2
 0
 4
+0
 
 Laura
 Llorar
 dead
-bedroom Annie
+bathroom
 *
-determined
-4.5
+apathetic
+0.0
 10
-8.5
+36.0
+0
 0
 0
 3
-0
-4
+2
 
 Maria
 Xu
-alive
-bathroom
+dead
+bedroom Maria
 *
-neutral
-6.5
+depressed
+0.0
 10
-30.5
+56.0
 0
-0
-3
-0
-4
-
-Annie
-Wiseau
-alive
-bedroom Annie
-*
-joyful
-2.5
-10
-38.5
 0
 0
 5
 0
+
+Annie
+Wiseau
+dead
+bedroom Annie
+*
+depressed
+0.0
+10
+73.5
+0
+0
+2
 3
+1
 
 Jeffery
 Jafar
-alive
-kitchen
+dead
+living room
 *
-joyful
-2.5
+depressed
+0.0
 10
-38.5
-1
-1
+60.0
+0
+2
+0
 4
 0
-3
 
 ROOMS:
 
 living room
-*
+Jeffery 
 gun TV deck_of_cards Catcher_in_the_rye Millenium food 
 neutral
 opened
@@ -90,19 +90,19 @@ neutral
 opened
 
 bathroom
-Maria 
+Laura 
 water 
 neutral
 opened
 
 kitchen
-Jeffery 
+Antoine 
 knife water food 
 neutral
 opened
 
 toilets
-Antoine 
+*
 flashlight rifle water 
 neutral
 opened
@@ -120,13 +120,13 @@ neutral
 opened
 
 bedroom Maria
-*
+Maria 
 CRT_TV 
 neutral
 opened
 
 bedroom Annie
-Laura Annie 
+Annie 
 *
 neutral
 opened
