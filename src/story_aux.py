@@ -300,6 +300,9 @@ class Character:
 			self.nutrition+= -0.5
 			self.sleep+= -0.5
 
+			in_mindstate = self.mind
+			out_mindstate = None
+
 			#2
 			if (c.time % 10 == 0) & (c.time != 0):
 				for value in self.relationships:
@@ -329,7 +332,7 @@ class Character:
 					for i in range(0,5):
 						if (i != self_idx) & (self.relationships[i] == 0):
 							c.environment.characters[i].alive = False
-							#print("M U R D E R\n")
+							print("\tBot : "+self.name+"  M U R D E R E D  "+c.environment.characters[i].name+"\n")
 							self.mind = "apathetic"
 							dead = True
 							break
@@ -346,7 +349,7 @@ class Character:
 
 					if dead == False:
 						self.alive = False
-						#print("S U I C I D E\n")
+						print("\tBot : "+self.name+"  K I L L E D  T H E M S E L V E S\n")
 
 				else:
 					self.move(c.environment.rooms[self_idx+5])
@@ -446,11 +449,18 @@ class Character:
 
 			self.move(c.environment.rooms[r.randint(0,9)])
 
+			out_mindstate = self.mind
+			if ((in_mindstate == out_mindstate) & (self.mind != "determined")) & (r.randint(0,2) == 0):
+				idx = mind_enum.index(self.mind)
+				self.mind = mind_enum[idx+1]
+
+
 
 
 		else:
-			self.alive == False
-			#print("D E A D\n")
+			if self.alive == True:
+				print("\tBot :"+self.name+" is D E A D\n")
+			self.alive = False
 
 		f.close()
 
