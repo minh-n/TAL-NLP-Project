@@ -32,4 +32,39 @@
 <tell> <character> <questionMark> {%char is %features.}
 
 <what> <character> <talking> <about> <questionMark> {%char is talking about %topic.}
-<what> <topic> <talking> <questionMark> {They are talking about %topic.}
+<what> <character> <topic> <talking> <questionMark> {They are talking about %topic.}
+
+
+<inventory> <pronoun> <questionMark> {%char has %object.}
+
+<pronoun> <mind_state> <questionMark> {%char is feeling %state.}
+<pronoun> <food_state> <questionMark> {%char is %state.}
+<pronoun> <hydra_state> <questionMark> {%char is %state.}
+<pronoun> <sleep_state> <questionMark> {%char is %state.}
+<pronoun> <death_state> <questionMark> {%char is %state.}
+<pronoun> <name> <questionMark> {%char's name is %state.}
+<pronoun> <surname> <questionMark> {%char's last name is %state.}
+
+<how> <pronoun> <mind_state> <questionMark> {%char is feeling %state.}
+<how> <pronoun> <food_state> <questionMark> {%char is %state.}
+<how> <pronoun> <hydra_state> <questionMark> {%char is %state.}
+<how> <pronoun> <sleep_state> <questionMark> {%char is %state.}
+<how> <pronoun> <death_state> <questionMark> {%char is %state.}
+<what> <pronoun> <name> <questionMark> {%char's name is %state.}
+<what> <pronoun> <surname> <questionMark> {%char's last name is %state.}
+<what> <about> <pronoun> <questionMark> {I believe %char is %state.}
+
+<pronoun> <like> <questionMark> {I think %char %yesno %target.}
+
+<what> <pronoun> <think> <questionMark> {I think %char %yesno %target.}
+<where> <will> <pronoun> <go> <questionMark> {%char is going to %room in a while.}
+<what> <will> <pronoun> <do> <questionMark> {%char is going to %action in a while.}
+
+<where> <pronoun> <questionMark> {%char is in %room.}
+<pronoun> <room> <questionMark> {%char is %yesno in %room.}
+
+<what> <tell> <about> <pronoun> <questionMark> {%char is %features.}
+<tell> <pronoun> <questionMark> {%char is %features.}
+
+<what> <pronoun> <talking> <about> <questionMark> {%char is talking about %topic.}
+<what> <pronoun> <topic> <talking> <questionMark> {%char are talking about %topic.}

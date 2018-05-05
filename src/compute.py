@@ -376,8 +376,8 @@ def modeThree(sent, characters, rooms, dictThreeLex, dictThreeTag, dictThreeSent
 	answer, contextState = storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState, contextState)
 	
 	#Debug
-	print("this sentence's tagList:")
-	print(listTags)
+	#print("this sentence's tagList:")
+	#print(listTags)
 
 	return answer, contextChar, contextPlace, contextObject, contextState
 
