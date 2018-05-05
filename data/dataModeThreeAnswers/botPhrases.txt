@@ -1,6 +1,6 @@
 <inventory> <character> <questionMark> {%char has %object.}
 
-<character> <mind_state> {%char is feeling %state.}
+<character> <mind_state> <questionMark> {%char is feeling %state.}
 <character> <food_state> <questionMark> {%char is %state.}
 <character> <hydra_state> <questionMark> {%char is %state.}
 <character> <sleep_state> <questionMark> {%char is %state.}
@@ -8,26 +8,22 @@
 <character> <name> <questionMark> {%char's name is %state.}
 <character> <surname> <questionMark> {%char's last name is %state.}
 
-<how> <character> <mind_state> {%char is feeling %state.}
+<how> <character> <mind_state> <questionMark> {%char is feeling %state.}
 <how> <character> <food_state> <questionMark> {%char is %state.}
 <how> <character> <hydra_state> <questionMark> {%char is %state.}
 <how> <character> <sleep_state> <questionMark> {%char is %state.}
 <how> <character> <death_state> <questionMark> {%char is %state.}
 <what> <character> <name> <questionMark> {%char's name is %state.}
 <what> <character> <surname> <questionMark> {%char's last name is %state.}
-<what> <about> <character> {%char is %state.}
+<what> <about> <character> <questionMark> {I believe %char is %state.}
 
 <character> <like> <questionMark> {I think %char %yesno %target.}
 
 <what> <character> <think> <questionMark> {I think %char %yesno %target.}
-<where> <will> <character> <go> <questionMark> {%char is going to %place in a while.}
+<where> <will> <character> <go> <questionMark> {%char is going to %room in a while.}
 <what> <will> <character> <do> <questionMark> {%char is going to %action in a while.}
 
-<where> <character> <questionMark> {%char is in %place}
-<character> <place> <questionMark> {%char is %yesno in %place}
-
-<how> <place> <questionMark> {%place is %state.}
-<what> <object> <place> <questionMark> {There is a %object in %place.}
-<object> <place> <questionMark> {%object is %yesno in %place.}
+<where> <character> <questionMark> {%char is in %room.}
+<character> <room> <questionMark> {%char is %yesno in %room.}
 
 <can> <character> <action> ???

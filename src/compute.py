@@ -8,14 +8,14 @@ from itertools import permutations
 
 
 #Compute an answer for mode one or two, depending on the input
-def modeOne(listMode, answerModeOne, appendString):
+def modeOne(listMode, previousAnswer, appendString):
 
 	loop = True
 
 	while(loop):
 		answerNum = random.randint(0,len(listMode)-1)
 		answer = listMode[answerNum]
-		if(answer != answerModeOne):
+		if(answer != previousAnswer):
 			loop = False
 		if(appendString != None):
 			mystring = answer
@@ -152,7 +152,6 @@ def getTagsFromSent(sent, dictThreeLex):
 	contextChar = ""
 	contextPlace = ""
 
-
 	listTags = []
 	for word in sent:
 		if word in dictThreeLex:
@@ -166,16 +165,17 @@ def getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObj
 	#updating context when needed
 
 	whichState = ""
-
 	for word in sent:
 		if word in dictThreeLex:
 			if dictThreeLex[word] == "character":
 				word = word.title()
 				contextChar = word
-			elif dictThreeLex[word] == "place":
+			elif dictThreeLex[word] == "room":
 				contextPlace = word
 			elif dictThreeLex[word] == "object":
 				contextObject = word
+			elif dictThreeLex[word] == "where":		#asking a question about the character's location
+				contextPlace = ""					#reseting current room 
 
 			elif dictThreeLex[word] == "sleep_state":
 				whichState = "sleep_state"
@@ -276,45 +276,47 @@ def getState(currentChar, whichState):
 	return simuState
 
 #Links the story with the chatbot. This function extracts data from the story, injecting it into the bot's answer's %tokens 
-def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState):
+def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState, contextState):
 
-	'''
-	charList = []
-	charList.append((Antoine,0))
-	charList.append((Laura,1))
-	charList.append((Maria,2))
-	charList.append((Annie,3))
-	charList.append((Jeffery,4))
-	'''
+	if whichState == "":
+		whichState = contextState
+	else:
+		contextState = whichState
 
 	simuState = ""
 	simuYesno = ""
 	simuAction = ""
+	simuLocation = contextPlace
 
 	#Antoine
 	if contextChar == "Antoine":
 		currentChar = characters[0]
 		simuState = getState(currentChar, whichState)
+		simuLocation = currentChar.location.name
 
 	#Laura
 	elif contextChar == "Laura":
 		currentChar = characters[1]
 		simuState = getState(currentChar, whichState)
+		simuLocation = currentChar.location.name
 
 	#Maria
 	elif contextChar == "Maria":
 		currentChar = characters[2]
 		simuState = getState(currentChar, whichState)
+		simuLocation = currentChar.location.name
 
 	#Annie
 	elif contextChar == "Annie":
 		currentChar = characters[3]
 		simuState = getState(currentChar, whichState)
+		simuLocation = currentChar.location.name
 
 	#Jeffery
 	elif contextChar == "Jeffery":
 		currentChar = characters[4]
 		simuState = getState(currentChar, whichState)
+		simuLocation = currentChar.location.name
 
 	#replacing regex with context and inputs
 	pattern = re.compile(r'\%char')
@@ -323,34 +325,35 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 	pattern = re.compile(r'\%state')
 	answer = pattern.sub(simuState, answer)
 
+	patternYes = re.compile(r'\%yesno')
+	patternPlace = re.compile(r'\%room')
+
+	if simuLocation == contextPlace:		#character is in contextPlace
+		answer = patternYes.sub("", answer)
+		answer = patternPlace.sub(simuLocation, answer)
+	elif contextPlace == "":
+		answer = patternYes.sub("", answer)
+		answer = patternPlace.sub(simuLocation, answer)
+	else:									#character is not in contextPlace
+		answer = pattern.sub(" not ", answer)
+		answer = pattern.sub(contextPlace, answer)
 
 
-
-	pattern = re.compile(r'\%place')
-	answer = pattern.sub(contextPlace, answer)
-
-	pattern = re.compile(r'\%object')
-	answer = pattern.sub(contextObject, answer)
-
-	#pattern = re.compile(r'\%yesno')
-	#answer = pattern.sub(simuYesno, answer)
 
 	#pattern = re.compile(r'\%action')
 	#answer = pattern.sub(simuAction, answer)
 
+	#pattern = re.compile(r'\%object')
+	#answer = pattern.sub(contextObject, answer)
 
-
-	return answer
+	return answer, contextState
 
 #The main mode 3 function
-def modeThree(sent, characters, rooms, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject):
+def modeThree(sent, characters, rooms, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject, contextState):
 
 	listTags = []
 
 	whichState = ""
-	simuAction = ""
-	simuYesno = ""
-	simuState = ""
 
 	contextChar, contextPlace, contextObject, whichState = getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObject)
 
@@ -359,13 +362,13 @@ def modeThree(sent, characters, rooms, dictThreeLex, dictThreeTag, dictThreeSent
 	number = getNumberFromTagList(listTags, dictThreeTag)
 	answer = getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags, contextChar, contextPlace, contextObject)
 
-	answer = storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState)
+	answer, contextState = storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState, contextState)
 	
 	#Debug
 	#print("this sentence's tagList:")
 	#print(listTags)
 
-	return answer, contextChar, contextPlace, contextObject
+	return answer, contextChar, contextPlace, contextObject, contextState
 
 
 

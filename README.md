@@ -58,12 +58,13 @@ Make sure your Python 3 install is up to date as some functions have been rename
 
 Possible areas for improvment would be:
 
+- adding the possibility to recognize multiple words for one tag (e.g. "Laura's bedroom" is currently recognized as Laura, 's and bedroom)
 - adding verbs and noun tagging, 
 - adding partial answers the chatbot will combine,
 - fixing typos such as blank spaces before question marks,
 - implementing a 'context' system for the chatbot to remember about the conversation's subject for example,
 - adding question recognition without question marks. Our tagging system relies on the ? at the end of each question,
-- and of course adding more tags and improving the simulation.
+- and of course adding more tags and improving the simulation, with true storytelling and a coherent narrator.
 
 
 ## Bonus: the simulation's parameters
