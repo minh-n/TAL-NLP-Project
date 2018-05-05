@@ -194,38 +194,3 @@ class Controller:
 
 '''
 
-
-
-
-'''
-#test MAIN
-print("\n")
-
-c = Controller()
-
-while input("q to quit\n") != "q" :
-	c.timeForward(1)
-
-print("\n")
-
-
-
-
-
-
-
-NOTES :
-Si le perso interagit avec un truc qui n'est pas dans sa pièce,
-on doit vérifier qu'il peut y aller, et il y move.
-
-Rajouter une quantité dans la fonction consume
-
-What about taking water?
-
-The order of rooms and characters are important
-
-Relationship avec soit même est miajour de manière débile
-
-Nothing changes the state of a room :/
-
-'''

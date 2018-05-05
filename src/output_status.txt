@@ -3,76 +3,76 @@ CHARACTERS:
 Antoine
 Aaronson
 alive
-kitchen
+Antoine's bedroom
 *
-apathetic
-4.5
+joyful
+7.0
 10
-8.5
+11.0
 3
 0
-3
 2
+0
 3
 
 Laura
 Llorar
-alive
-bedroom Laura
+dead
+roof
 *
-determined
-4.5
+neutral
+7.5
 10
-8.5
+11.5
 3
 0
 3
-3
+0
 3
 
 Maria
 Xu
 alive
-bedroom Maria
+Annie's bedroom
 *
-apathetic
-4.5
+neutral
+7.0
 10
-8.5
-3
+11.0
+2
 0
 3
-3
+0
 3
 
 Annie
 Wiseau
 alive
-bedroom Annie
+Annie's bedroom
 *
-apathetic
-4.5
+determined
 10
-8.5
-2
+10
+11.0
+3
 0
 3
-3
+0
 3
 
 Jeffery
 Jafar
 alive
-bedroom Antoine
+kitchen
 *
-joyful
-8.5
+apathetic
+3.0
 10
-4.5
+15.0
 3
 0
 3
-3
+0
 3
 
 ROOMS:
@@ -84,7 +84,7 @@ neutral
 opened
 
 roof
-*
+Laura 
 crowbar the_view 
 neutral
 opened
@@ -96,7 +96,7 @@ neutral
 opened
 
 kitchen
-Antoine 
+Jeffery 
 knife water food good_food 
 neutral
 opened
@@ -107,31 +107,31 @@ flashlight rifle water
 neutral
 opened
 
-bedroom Antoine
-Jeffery 
+Antoine's bedroom
+Antoine 
 *
 neutral
 opened
 
-bedroom Laura
-Laura 
+Laura's bedroom
+*
 *
 neutral
 opened
 
-bedroom Maria
-Maria 
+Maria's bedroom
+*
 CRT_TV 
 neutral
 opened
 
-bedroom Annie
-Annie 
+Annie's bedroom
+Maria Annie 
 *
 neutral
 opened
 
-bedroom Jeffery
+Jeffery's bedroom
 *
 War_and_peace 
 neutral

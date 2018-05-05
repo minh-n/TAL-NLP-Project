@@ -288,6 +288,7 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 	simuYesno = ""
 	simuAction = ""
 	charFeatures = ""
+	simuTopic = ""
 	simuLocation = contextPlace
 
 	#Antoine
@@ -296,6 +297,7 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
 		charFeatures = "a young man, late twenties. He likes chocolate cake and the movie \"The Room\"" 
+		simuTopic = currentChar.conv
 
 	#Laura
 	elif contextChar == "Laura":
@@ -303,7 +305,7 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
 		charFeatures = "Miss Polytech 2017, she was sent to this house to seek the Holy Grail" 
-
+		simuTopic = currentChar.conv
 
 	#Maria
 	elif contextChar == "Maria":
@@ -311,7 +313,7 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
 		charFeatures = "a 17-year-old high school girl. It seems that she likes Scott Pilgrim" 
-
+		simuTopic = currentChar.conv
 
 	#Annie
 	elif contextChar == "Annie":
@@ -319,7 +321,7 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
 		charFeatures = "secretly a Titan, but shhhh." 
-
+		simuTopic = currentChar.conv
 
 	#Jeffery
 	elif contextChar == "Jeffery":
@@ -327,7 +329,7 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 		simuState = getState(currentChar, whichState)
 		simuLocation = currentChar.location.name
 		charFeatures = "a pro Hearthstone player. He likes to play even if he has a project to turn in for tomorrow" 
-
+		simuTopic = currentChar.conv
 
 	#replacing regex with context and inputs
 	pattern = re.compile(r'\%char')
@@ -352,8 +354,8 @@ def storyLink(answer, characters, rooms, contextChar, contextPlace, contextObjec
 	pattern = re.compile(r'\%features')
 	answer = pattern.sub(charFeatures, answer)
 
-	#pattern = re.compile(r'\%object')
-	#answer = pattern.sub(contextObject, answer)
+	pattern = re.compile(r'\%topic')
+	answer = pattern.sub(simuTopic, answer)
 
 	return answer, contextState
 
@@ -374,8 +376,8 @@ def modeThree(sent, characters, rooms, dictThreeLex, dictThreeTag, dictThreeSent
 	answer, contextState = storyLink(answer, characters, rooms, contextChar, contextPlace, contextObject, whichState, contextState)
 	
 	#Debug
-	#print("this sentence's tagList:")
-	#print(listTags)
+	print("this sentence's tagList:")
+	print(listTags)
 
 	return answer, contextChar, contextPlace, contextObject, contextState
 

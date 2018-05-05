@@ -30,3 +30,6 @@
 
 <what> <tell> <about> <character> <questionMark> {%char is %features.}
 <tell> <character> <questionMark> {%char is %features.}
+
+<what> <character> <talking> <about> <questionMark> {%char is talking about %topic.}
+<what> <topic> <talking> <questionMark> {They are talking about %topic.}
