@@ -38,7 +38,7 @@ The command used to run the project is:
 
 ## Troubleshooting
 
-It may be needed to replace the *input()* function with *raw_input()* when using Mac OS. 
+It may be needed to replace the `input()` function with `raw_input()` when using Mac OS. 
 
 ## Future development
 
