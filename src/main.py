@@ -44,8 +44,11 @@ if __name__=="__main__":
 	#iterator to link the user input to the story
 	count_input = 0
 
-	#controller of the story
+	#controller of the story, and point of acces to data :
 	c = story.Controller()
+	characters = c.environment.characters
+	rooms = c.environment.rooms
+
 
 	#main while loop
 	while(user != "quit"): 	

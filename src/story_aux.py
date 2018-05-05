@@ -349,7 +349,7 @@ class Character:
 						#print("S U I C I D E\n")
 
 				else:
-					self.move(c.environment.rooms[self_idx+5])
+					self.move(c.environment.rooms[self_idx+5]
 
 			if self.mind == "apathetic":
 				action = r.randint(1,3)
