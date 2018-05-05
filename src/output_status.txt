@@ -3,77 +3,77 @@ CHARACTERS:
 Antoine
 Aaronson
 dead
-bathroom
+toilets
 *
 neutral
 0.0
 10
-44.0
-3
-1
-1
+28.0
 0
--1
+0
+2
+0
+4
 
 Laura
 Llorar
 dead
-toilets
+bedroom Annie
 *
-depressed
-0.0
+determined
+4.5
 10
-40.0
-5
-3
+8.5
+0
+0
 3
 0
-7
+4
 
 Maria
 Xu
-dead
-bedroom Laura
+alive
+bathroom
 *
-depressed
-3.0
+neutral
+6.5
 10
-19.0
+30.5
+0
+0
+3
+0
 4
-6
-0
-0
--2
 
 Annie
 Wiseau
-dead
-bathroom
+alive
+bedroom Annie
 *
-depressed
-0.5
+joyful
+2.5
 10
-68.5
-1
-1
-2
+38.5
 0
-2
+0
+5
+0
+3
 
 Jeffery
 Jafar
-dead
-bedroom Maria
+alive
+kitchen
 *
-apathetic
-0.0
+joyful
+2.5
 10
-56.0
-2
-8
+38.5
+1
+1
+4
 0
-0
-0
+3
 
 ROOMS:
 
@@ -90,19 +90,19 @@ neutral
 opened
 
 bathroom
-Antoine Annie 
+Maria 
 water 
 neutral
 opened
 
 kitchen
-*
+Jeffery 
 knife water food 
 neutral
 opened
 
 toilets
-Laura 
+Antoine 
 flashlight rifle water 
 neutral
 opened
@@ -114,19 +114,19 @@ neutral
 opened
 
 bedroom Laura
-Maria 
+*
 *
 neutral
 opened
 
 bedroom Maria
-Jeffery 
+*
 CRT_TV 
 neutral
 opened
 
 bedroom Annie
-*
+Laura Annie 
 *
 neutral
 opened

@@ -259,23 +259,37 @@ class Character:
 
 	#mode : string
 	def talk(self, person, c, mode="default"):
+		if r.randint(0,10) != 0:
+			return 0
+
 		self_idx = c.environment.characters.index(self)
 		person_idx = c.environment.characters.index(person)
 
+		print("\tBot : "+self.name+" and "+person.name+" are talking together\n")
+
 		if mode == "default" :
-			#print random_conv or real_talk
 
 			if r.randint(0,1) == 1 :
 				self.relationships[person_idx] += 1;
 				person.relationships[self_idx] += 1;
+				if r.randint(0,2) == 2 :
+					print("\tBot : Looks like they agree with each other\n")
+
 			else :
 				self.relationships[person_idx] -= 1;
 				person.relationships[self_idx] -= 1;
+				if r.randint(0,2) == 2 :
+					print("\tBot : It seems they are arguing pretty bad\n")
 
 		else :
-			#print cheerup
+
+			print("\tBot : "+self.name+" is trying to cheer "+person.name+" up\n")
 			value = r.randint(0,2)
+			self.relationships[person_idx] += value;
 			person.relationships[self_idx] += value;
+			if (person.mind != "determined") & (person.mind != "joyful"):
+				idx = mind_enum.index(person.mind)
+				person.mind = mind_enum[idx+value]
 
 		return 0
 
@@ -328,7 +342,7 @@ class Character:
 
 			if self.mind == "depressed":
 				dead = False
-				if r.randint(0,8) == 0:
+				if r.randint(0,10) == 0:
 					for i in range(0,5):
 						if (i != self_idx) & (self.relationships[i] == 0):
 							c.environment.characters[i].alive = False
