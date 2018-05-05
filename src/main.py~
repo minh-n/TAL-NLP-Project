@@ -41,17 +41,9 @@ if __name__=="__main__":
 	#the user's input
 	user = ""
 
-	#iterator to link the user input to the story
-	count_input = 0
-
-	#controller of the story
-	c = story.Controller()
-
 	#main while loop
-	while(user != "quit"): 	
-		count_input += 1
-
-		user = input("User: ")	#the user will be able to quit the program by typing 'quit'
+	while(user != "quit"): 			
+		user = raw_input("User: ")	#the user will be able to quit the program by typing 'quit'
 		if user == "quit":
 			printAnswer("Goodbye!")
 		else:
@@ -71,8 +63,5 @@ if __name__=="__main__":
 					answerModeOne = compute.modeOne(listModeOne, answerModeOne, None)
 					printAnswer(answerModeOne)
 					print("CurrentMode=1")
-
-		if count_input%2 == 0 :
-			c.timeForward(1)
 
 			

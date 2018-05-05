@@ -1,0 +1,143 @@
+CHARACTERS:
+
+Antoine
+Aaronson
+alive
+toilets
+*
+apathetic
+0.0
+10
+28.0
+3
+4
+1
+1
+0
+
+Laura
+Llorar
+alive
+bedroom Antoine
+*
+joyful
+2.5
+10
+30.5
+2
+0
+2
+0
+9
+
+Maria
+Xu
+alive
+bedroom Laura
+*
+depressed
+0.0
+10
+40.0
+3
+0
+3
+3
+5
+
+Annie
+Wiseau
+dead
+toilets
+*
+neutral
+7.5
+10
+21.0
+4
+0
+6
+0
+2
+
+Jeffery
+Jafar
+alive
+bedroom Antoine
+*
+depressed
+6.0
+10
+46.5
+0
+6
+2
+-1
+3
+
+ROOMS:
+
+living room
+*
+gun TV deck_of_cards Catcher_in_the_rye Millenium food 
+neutral
+opened
+
+roof
+*
+crowbar the_view 
+neutral
+opened
+
+bathroom
+*
+water 
+neutral
+opened
+
+kitchen
+*
+knife water food 
+neutral
+opened
+
+toilets
+Annie Antoine 
+flashlight rifle water 
+neutral
+opened
+
+bedroom Antoine
+Laura Jeffery 
+*
+neutral
+opened
+
+bedroom Laura
+Maria 
+*
+neutral
+opened
+
+bedroom Maria
+*
+CRT_TV 
+neutral
+opened
+
+bedroom Annie
+*
+*
+neutral
+opened
+
+bedroom Jeffery
+*
+War_and_peace 
+neutral
+opened
+
+OBJECTS:
+
+gun
+living room
