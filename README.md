@@ -50,6 +50,63 @@ Possible areas for improvment would be:
 - implementing a 'context' system for the chatbot to remember about the conversation's subject for example,
 - and of course adding more tags.
 
+
+## Bonus: the simulation's parameters
+
+5 CHARACTERS
+
+Annie, Antoine, Maria, Jeffery, Laura.
+
+Each character is defined by :
+-its name and last name
+-its gender
+-In which room he is in
+-the objects he carries
+-his state of mind at the moment
+-his physical health
+-his nutrition, hydration and sleep levels
+-his relationship with the other characters
+
+
+THE ROOM(s) :
+
+Living room, kitchen, toilets, bathroom, roof, a bedroom for each character, and the outside.
+
+Each room is defined by :
+-its name
+-its state (messy, wrecked, tidy…)
+-if people can acces it
+-who is inside
+-what it contains (tools, ressources, and entertainments)
+
+THE RESSOURCES :
+
+They are consumed when used, and have different effect depending on what they are.
+The different ressources that appear in the simulation are :
+-Water
+-Basic Food
+-Well Prepared food
+-Medicines
+-Alcohol
+
+THE ENTERTAINMENTS :
+
+The different entertainments that appear in the simulation are :
+-TV
+-Deck of cards
+-Books
+-Computer
+
+THE TOOLS :
+
+The different tools available in the simulation are :
+-Crowbar
+-Gun
+-Rifle
+-Torchlamp
+-might add more later
+
+
 ## Project members
 
 Adrien Lavillonnière (`Veados`)

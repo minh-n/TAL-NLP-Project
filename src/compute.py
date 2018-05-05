@@ -214,27 +214,34 @@ def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags, conte
 		ansStr = " ".join(answer)
 
 	#replacing regex with context
-	mystring = ansStr
+
 	pattern = re.compile(r'\%char')
-	newstring = pattern.sub(contextChar, mystring)
-	ansStr = newstring
+	ansStr = pattern.sub(contextChar, ansStr)
 
-	mystring = ansStr
 	pattern = re.compile(r'\%place')
-	newstring = pattern.sub(contextPlace, mystring)
-	ansStr = newstring
+	ansStr = pattern.sub(contextPlace, ansStr)
 
-	mystring = ansStr
 	pattern = re.compile(r'\%object')
-	newstring = pattern.sub(contextObject, mystring)
-	ansStr = newstring
+	ansStr = pattern.sub(contextObject, ansStr)
 
+	#pattern = re.compile(r'\%yesno')
+	#ansStr = pattern.sub(simuYesno, ansStr)
+
+	#pattern = re.compile(r'\%action')
+	#ansStr = pattern.sub(simuAction, ansStr)
+
+	#pattern = re.compile(r'\%state')
+	#ansStr = pattern.sub(simuState, ansStr)
 	return ansStr
 
 #The main mode 3 function
 def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject):
 
 	listTags = []
+
+	simuAction = ""
+	simuYesno = ""
+	simuState = ""
 
 	contextChar, contextPlace, contextObject = getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObject)
 
@@ -246,7 +253,7 @@ def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, 
 	#Debug
 	print("this sentence's tagList:")
 	print(listTags)
-	
+
 	return answer, contextChar, contextPlace, contextObject
 
 

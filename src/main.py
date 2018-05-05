@@ -41,7 +41,7 @@ if __name__=="__main__":
 	#the user's input
 	user = ""
 
-	#the conversation's context (used to replace the regex in the bot's answers)
+	#the conversation's context, used to replace the regex in the bot's answers in mode3
 	contextChar = ""
 	contextPlace = ""
 	contextObject = ""
