@@ -68,7 +68,7 @@ def createDictSubject():
 #------MODE THREE------
 #----------------------
 
-#Creates a dictionary of every words from each of the 5 txt files
+#Creates a dictionary of every words from each of the mode3's txt files
 def createDictThreeLex():
 	dictThreeLex = {}
 
@@ -85,7 +85,7 @@ def createDictThreeLex():
 
 	return dictThreeLex
 
-#Extracts tags from a <tag1><tag2>{sentence} line
+#Extracts tags from a <tag1> <tag2> {sentence} line
 def extractTag(line):
 	tag = re.findall('<\S+>', line)
 	tagClean = []

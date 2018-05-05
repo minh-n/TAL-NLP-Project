@@ -1,9 +1,6 @@
-<tagCharacter> {Tommy is alone. one tagChar and only one}
 <tagCharacter> <tagEmotion> {Tommy has emotions tagChar and tagEmotion}
 <p1> <tagEnvironment> {impossible sentece}
-<tagEnvironment> <tagCharacter> {Tommy is in Room tagEnvi and tagChar}
-<tagCharacter> <tagEnvironment> {Tommy is in Room tagChar and tagEnvi}
-<tagCharacter> {Tommy is alone. one tagChar and only one}
-<tagCharacter> <tagCharacter> <tagCharacter> <tagCharacter> {Tommy is with four other tagChar.}
-<tagEnvironment> <tagCharacter> <tagCharacter> {Tommy is in Room with another person}
 <tagEnvironment> <tagWelcome> <tagCharacter> {Hello salut ################}
+<tagPlace> <tagCharacter> {Tagg place %place tag char %char}
+<tagCharacter> {Tagg %char only}
+<tagPlace> <tagSubject> {Subject is %char and %char is in the %place}

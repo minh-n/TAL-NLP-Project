@@ -41,15 +41,21 @@ if __name__=="__main__":
 	#the user's input
 	user = ""
 
+	#the conversation's context (used to replace the regex in the bot's answers)
+	contextChar = ""
+	contextPlace = ""
+	contextObject = ""
+
 	#main while loop
 	while(user != "quit"): 			
 		user = raw_input("User: ")	#the user will be able to quit the program by typing 'quit'
+		user = user.lower()
 		if user == "quit":
 			printAnswer("Goodbye!")
 		else:
 			sent = parser.tokenizeSentence(user) 	#the user's sentence is tokenized
 
-			answerModeThree = compute.modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence)
+			answerModeThree, contextChar, contextPlace, contextObject = compute.modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject)
 			if answerModeThree != "": 				#if a mode3 answer is returned
 				printAnswer(answerModeThree)
 				print("CurrentMode=3")

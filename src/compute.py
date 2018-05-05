@@ -149,12 +149,31 @@ def getlistPermutations(listTags):
 #Extracts tags from a sentence
 def getTagsFromSent(sent, dictThreeLex):
 
+	contextChar = ""
+	contextPlace = ""
+
+
 	listTags = []
 	for word in sent:
 		if word in dictThreeLex:
 			listTags.append(dictThreeLex[word])
 
 	return listTags
+
+#Extracts the sentence's context
+def getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObject):
+
+	#updating context when needed
+	for word in sent:
+		if word in dictThreeLex:
+			if dictThreeLex[word] == "tagCharacter":
+				contextChar = word
+			elif dictThreeLex[word] == "tagPlace":
+				contextPlace = word
+			elif dictThreeLex[word] == "tagObject":
+				contextObject = word
+
+	return (contextChar, contextPlace, contextObject)
 
 #Finds the corresponding number for a
 #given a list of tags. If there is none, -1 is returned.
@@ -173,7 +192,7 @@ def getNumberFromTagList(listTags, dictThreeTag):
 #Computes an answer for mode three.
 #This function is also able to find another corresponding list
 #in case nothing is recognized at first.
-def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags):
+def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags, contextChar, contextPlace, contextObject):
 
 	ansStr = "" 				 
 	numberRoundTwo = -1									#in case we didn't find a suitable answer the first time
@@ -190,27 +209,45 @@ def getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags):
 				break
 			elif numberRoundTwo < 0: 
 				ansStr = ""								#no answer is found. We switch to mode 2 by returning an empty answer.
-
 	else:
 		answer = dictThreeSentence.get(number)
 		ansStr = " ".join(answer)
 
+	#replacing regex with context
+	mystring = ansStr
+	pattern = re.compile(r'\%char')
+	newstring = pattern.sub(contextChar, mystring)
+	ansStr = newstring
+
+	mystring = ansStr
+	pattern = re.compile(r'\%place')
+	newstring = pattern.sub(contextPlace, mystring)
+	ansStr = newstring
+
+	mystring = ansStr
+	pattern = re.compile(r'\%object')
+	newstring = pattern.sub(contextObject, mystring)
+	ansStr = newstring
+
 	return ansStr
 
-
 #The main mode 3 function
-def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence):
+def modeThree(sent, dictThreeLex, dictThreeTag, dictThreeSentence, contextChar, contextPlace, contextObject):
 
 	listTags = []
-	
-	#TODO context
+
+	contextChar, contextPlace, contextObject = getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObject)
 
 	listTags = getTagsFromSent(sent, dictThreeLex)
+
 	number = getNumberFromTagList(listTags, dictThreeTag)
-	answer = getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags)
+	answer = getAnswerFromNumber(number, dictThreeTag, dictThreeSentence, listTags, contextChar, contextPlace, contextObject)
+	
+	#Debug
 	print("this sentence's tagList:")
 	print(listTags)
-	return answer
+	
+	return answer, contextChar, contextPlace, contextObject
 
 
 
