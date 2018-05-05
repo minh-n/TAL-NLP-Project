@@ -3,4 +3,5 @@
 <tagEnvironment> <tagWelcome> <tagCharacter> {Hello salut ################}
 <tagPlace> <tagCharacter> {Tagg place %place tag char %char}
 <tagCharacter> {What do you think about %char?}
-<tagPlace> <tagSubject> {%char is currently in the %place.}
+<tagPlace> <tagSubject> {%char is currently in the %place. Subj}
+<tagPlace> <tagCharacter> {%char is currently in the %place. Char}
