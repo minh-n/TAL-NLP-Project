@@ -28,9 +28,13 @@ The NLTK library was used, especially its tokenize function: it is able to separ
 
 To run the program using NLTK, downloading an extra package may be required: 
 
+`pip install nltk`
 `python -m nltk.downloader 'punkt'`
 
-The package is included as well with this git (`/nltk_data/tokenizers`)
+The package is included as well with this git (`/nltk_data/tokenizers`). In case the NLTK downloader is broken, you can copy the nlkt_data folder into:
+- Windows: `C:\nlkt_data\tokenizers`
+- Mac OS: `/usr/local/share/nlkt_data/tokenizers`
+- Unix: `/usr/share/nlkt_data/tokenizers`
 
 The command used to run the project is:
 
@@ -38,7 +42,7 @@ The command used to run the project is:
 
 ## Troubleshooting
 
-It may be needed to replace the `input()` function with `raw_input() when using Mac OS. 
+Make sure your Python 3 install is up to date as some functions have been renamed (`iteritems()` and `.raw_input()` for example)
 
 ## Future development
 

@@ -48,7 +48,7 @@ if __name__=="__main__":
 
 	#main while loop
 	while(user != "quit"): 			
-		user = raw_input("User: ")	#the user will be able to quit the program by typing 'quit'
+		user = input("User: ")	#the user will be able to quit the program by typing 'quit'
 		user = user.lower()
 		if user == "quit":
 			printAnswer("Goodbye!")

@@ -180,7 +180,7 @@ def getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObj
 def getNumberFromTagList(listTags, dictThreeTag):
 
 	number = -1
-	for key, value in dictThreeTag.iteritems(): 		#key is a number between 0 and n
+	for key, value in dictThreeTag.items(): 		#key is a number between 0 and n
 		if set(listTags) == set(value):
 			number = key
 			break
