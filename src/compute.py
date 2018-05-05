@@ -167,6 +167,7 @@ def getContextFromSent(sent, dictThreeLex, contextChar, contextPlace, contextObj
 	for word in sent:
 		if word in dictThreeLex:
 			if dictThreeLex[word] == "tagCharacter":
+				word = word.title()
 				contextChar = word
 			elif dictThreeLex[word] == "tagPlace":
 				contextPlace = word

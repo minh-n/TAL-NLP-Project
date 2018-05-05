@@ -2,5 +2,5 @@
 <p1> <tagEnvironment> {impossible sentece}
 <tagEnvironment> <tagWelcome> <tagCharacter> {Hello salut ################}
 <tagPlace> <tagCharacter> {Tagg place %place tag char %char}
-<tagCharacter> {Tagg %char only}
-<tagPlace> <tagSubject> {Subject is %char and %char is in the %place}
+<tagCharacter> {What do you think about %char?}
+<tagPlace> <tagSubject> {%char is currently in the %place.}
