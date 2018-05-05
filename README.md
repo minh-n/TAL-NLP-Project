@@ -44,11 +44,11 @@ The command used to run the project is:
 
 When running the chatbot, the user can ask questions such as:
 - Where is Annie?
-- What is she doing?
+- How is she doing?
 
 To which the chatbot will be able to answer:
 - Annie is in the kitchen.
-- Annie is preparing food.
+- Annie is feeling depressed.
 
 ## Troubleshooting
 
