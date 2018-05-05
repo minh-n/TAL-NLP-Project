@@ -17,4 +17,6 @@ def nbToWord(tag, state):
 			string += "normally"
 
 		else :
-			string = "not "+" at all"
+			string = "not "+string+" at all"
+
+	return string
