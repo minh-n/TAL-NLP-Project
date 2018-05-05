@@ -1,0 +1,12 @@
+dead
+death
+alive
+live
+lives
+kill
+kills
+killed
+muredered
+murder
+suicide
+

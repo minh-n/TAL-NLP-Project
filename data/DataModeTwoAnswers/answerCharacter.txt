@@ -1,2 +1,3 @@
-je suis un character
-test character
+What do you think about <character>?
+Do you like <character>?
+What do you think will happen to <character>?

@@ -1,8 +1,13 @@
-be
+m
 am
-is
-are
 was
-were
-been
-being
+am being
+have been
+will be
+was being
+had been
+will have been
+will be being
+have been being
+had been being
+will have been being
