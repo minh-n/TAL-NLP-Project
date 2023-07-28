@@ -101,6 +101,6 @@ Adrien Lavillonnière (`Veados`)
 
 Corentin Manscour (`neofoetus`)
 
-Hien Minh Nguyen (`shipanda01`)
+Hien Minh Nguyen (`minh-n`)
 
 Polytech-Paris Sud
